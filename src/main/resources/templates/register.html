@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::header" class="header">
+</header>
+<section class="registerAndLoginBg">
+<div class="wrapper">
+    <form th:action="@{/register}" th:method="post"
+          th:object="${registerBindingModel}"
+            class="form-register">
+        <h2 class="form-register-heading">Създай акаунт</h2>
+        <input th:field="*{username}"  th:errorclass="bg-danger"
+               type="text" class="form-control" name="username" placeholder="Потребителско име"
+               id="username"
+               aria-describedby="usernameHelpInline" />
+        <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+               id="usernameHelpInline"
+               class="rounded"></small>
+        <input  th:field="*{email}" th:errorclass="bg-danger" type="email" class="form-control" name="email" placeholder="E-mail адрес" />
+        <small  th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+               class="rounded"></small>
+        <input th:field="*{first_name}" th:errorclass="bg-danger" type="text" class="form-control" name="firstName" placeholder="Име" />
+        <small th:if="${#fields.hasErrors('first_name')}" th:errors="*{first_name}"
+               class=" rounded"></small>
+        <input  th:field="*{last_name}" th:errorclass="bg-danger" type="text" class="form-control" name="lastName" placeholder="Фамилия" required=""/>
+        <small th:if="${#fields.hasErrors('last_name')}" th:errors="*{last_name}"
+               class=" rounded"></small>
+        <input  th:field="*{age}" th:errorclass="bg-danger" type="number" class="form-control" name="age" placeholder="Години"/>
+        <small th:if="${#fields.hasErrors('age')}" th:errors="*{age}"
+               class=" rounded"></small>
+        <input   th:field="*{password}" th:errorclass="bg-danger"type="password" class="form-control" name="password" placeholder="Парола" required=""/>
+        <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+               class="  rounded"></small>
+        <input  th:field="*{confirmPassword}" th:errorclass="bg-danger" type="password" class="form-control" name="confirmPassword" placeholder="Повторете паролата" required=""/>
+        <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
+               class="  rounded"></small>
+
+        <select  th:field="*{gender}" th:errorclass="bg-danger"  class="form-control form-control-lg" name="gender">
+            <option value="" selected>Избери пол</option>
+            <option th:each="c : ${T(com.example.booksforgram.model.entity.enums.GenderEnum).values()}" th:value="${c}" th:text="${c}"></option>
+        </select>
+        <small th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"
+               class="  rounded"></small>
+<!--        <label class="checkbox">-->
+<!--            <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me-->
+<!--        </label>-->
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Регистрация</button>
+    </form>
+</div>
+</section>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+
+<header th:replace="fragments/commons::header" class="header">
+</header>
+<body>
+
+<section class="deal error">
+
+    <div class="content">
+        <h1 class="error">Ууупс ГРЕШКА!</h1>
+
+        <!--Sorry but we cannot find the requested resource!-->
+        <h4>  Върни се в страницата на всички книги <a href="/featured">тук</a>!</h4>
+        <h4> Върни се в началната страница <a href="/">тук</a>!</h4>
+    </div>
+
+    <div class="image">
+        <img src="/images/404P.jpg" alt="">
+    </div>
+
+</section>
+</body>
+<footer th:replace="fragments/commons::footer"></footer>
+
+</body>
+</html>

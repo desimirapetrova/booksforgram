@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+
+<header th:replace="fragments/commons::header" class="header">
+</header>
+<h1 class="heading"> <span>Всички книги</span> </h1>
+
+<div class="container d-flex justify-content-center mt-50 mb-50">
+    <div class="row">
+        <div th:each="b : ${books}" th:object="${b}" th:if="${b.quantity>0}" class="col-md-4 mt-2">
+            <div    class="card">
+                <div class="card-body">
+                    <div class="card-img-actions center"> <img th:src="*{getImageUrl()}"class="img-fluid2 img-fluid" alt=""> </div>
+                </div>
+                <div class="iconss">
+                    <a th:href="@{/details/{id}(id = *{id})}" class="fas fa-info-circle" > детайли </a>
+
+                </div>
+                <div class="card-body bg-light text-center">
+                    <div class="mb-2">
+                        <h6  class="font-weight-semibold mb-2">
+                            <a th:text="*{name}" class="text-default mb-2" >Book "MDKFKWF"</a>
+                        </h6>
+                        <a th:text="*{category.name}" th:href="@{/categories(id =${b.category.getId()})}" class="text-muted" data-abc="true">Roman</a>
+                    </div>
+                    <h3 th:text="|*{price}лв.|" class="mb-0 font-weight-semibold">$9</h3>
+                    <div> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> </div>
+                    <div class="text-muted mb-3">34 reviews</div>
+                    <th:block th:if="${user!=null}">
+                    <th:block th:if="${b.owner.username==user.username}"   >
+
+                        <a th:href="@{/books/{id}/edit(id=*{id})}" type="submit" class="btn bg-cart"><i class="fa  mr-2"></i> Редактирай</a>
+                        <form th:action="@{/books/{id}(id=*{id})}" th:method="delete">
+                            <input type="submit" class="btn  bg-danger" value="Изтрий"/>
+                        </form>
+                    </th:block>
+<!--                    <th:block  sec:authorize="hasRole('ADMIN')" >-->
+<!--                        <a th:href="@{/books/{id}/edit(id=*{id})}" type="submit" class="btn bg-cart"><i class="fa  mr-2"></i> Редактирай</a>-->
+<!--                        <form th:action="@{/books/{id}(id=*{id})}" th:method="delete">-->
+<!--                            <input type="submit" class="btn  bg-danger" value="Изтрий"/>-->
+<!--                        </form>-->
+<!--                    </th:block>-->
+
+                    <th:block th:unless="${b.owner.username==user.username}" >
+                        <th:block sec:authorize="hasRole('USER')">
+                            <form th:action="@{/addToCart}" th:method="post"  >
+                            <input type="hidden" name="add" th:value="*{id}" />
+
+                            <button  type="submit" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i>Добави в количката</button>
+                    </form>
+                        <form th:action="@{/addToWishList}" th:method="post"  >
+                            <input type="hidden" name="add" th:value="*{id}" />
+                            <button  type="submit" class="btn bg-cart"><i class=" fas fa-heart mr-2"></i> Добави в любими</button>
+
+                        </form>
+                    </th:block>
+                         <th:block sec:authorize="hasRole('ADMIN')">
+                            <a th:href="@{/books/{id}/edit(id=*{id})}" type="submit" class="btn bg-cart"><i class="fa  mr-2"></i> Редактирай</a>
+                            <form th:action="@{/books/{id}(id=*{id})}" th:method="delete">
+                                <input type="submit" class="btn  bg-danger" value="Изтрий"/>
+                            </form>
+
+                        </th:block>
+                    </form>
+                    </th:block>
+                    </th:block>
+
+                </div>
+
+            </div>
+
+        </div>
+</div>
+
+</div>
+
+</div>
+
+<footer th:replace="fragments/commons::footer"></footer>
+
+</body>
+</html>

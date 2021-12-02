@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+
+<header th:replace="fragments/commons::header" class="header">
+</header>
+<body>
+
+<section class="deal error2">
+
+    <div class="content">
+        <h1 class="error2">Не съществува такава книга</h1>
+
+        <!--Sorry but we cannot find the requested resource!-->
+        Върни се в страницата на всички книги <a style="color: white" href="/featured">тук</a>!
+        Върни се в началната страница <a style="color: white" href="/">тук</a>!
+    </div>
+
+    <div class="image">
+        <img src="/images/error9.png" alt="">
+    </div>
+
+</section>
+</body>
+<footer th:replace="fragments/commons::footer"></footer>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::header" class="header">
+</header>
+<section class="registerAndLoginBg">
+
+<div class="wrapper">
+    <form th:action="@{/login}"
+          th:method="post"
+          th:object="${loginBindingModel}"
+          class="form-signin">
+        <h2 class="form-signin-heading">Вход за потребители
+        </h2>
+        <h3 th:if="${isFound == false}"  class="mt-5 text-center">
+            <strong class="rounded  pl-3 text-danger">Enter valid
+                username and
+                password</strong>
+        </h3>
+
+        <input th:field="*{username}" type="text" class="form-control" name="username" placeholder="Потребителско име"  />
+        <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+               class="  rounded"></small>
+        <input th:field="*{password}" type="password" class="form-control" name="password" placeholder="Парола" />
+        <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+               class="  rounded"></small>
+        <!--
+ <label class="checkbox">-->
+<!--            <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Запомни ме-->
+<!--        </label>-->
+        <a class=" btn-register" href="/register" role="button">Нов потребител?</a>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
+    </form>
+</div>
+</section>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/commons::head"></head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<body>
+
+<header th:replace="fragments/commons::header" class="header">
+</header>
+<main>
+
+    <div th:each="result:${searchResult}" th:object="${result}" class="container">
+
+        <!--Section: Block Content-->
+        <section class="details my-5">
+
+            <div  class="row">
+                <div class="col-md-5 mb-4 mb-md-0">
+
+                    <div class="view zoom z-depth-2 rounded">
+                        <div class="card-img-actions center"> <img th:src="*{imageUrl}" width="250" height="320" alt=""> </div>
+                        <a href="#!">
+                            <div class="mask waves-effect waves-light"></div>
+                        </a>
+                    </div>
+
+                </div>
+                <div  class="col-md-7">
+
+                    <h5 class=" titleName"  th:text="*{name}" >Name of product</h5>
+                    <p th:text="*{author}"class="mb-2">Author</p>
+                    <p><span class="mr-1"><strong th:text="|*{price} лв.|">$79.99</strong></span></p>
+                    <p th:text="*{description}" class="pt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
+                        error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam.</p>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-borderless mb-0">
+                            <tbody>
+                            <tr>
+                                <th  class="pl-0 w-25" scope="row"><strong>Категория</strong></th>
+                                <td th:text="*{category.name}">CATEGORY</td>
+                            </tr>
+                            <tr>
+                                <th class="pl-0 w-25" scope="row"><strong>Състояние</strong></th>
+                                <td th:text="*{condition.name}">CONDITION</td>
+                            </tr>
+                            <tr>
+                                <th class="pl-0 w-25" scope="row"><strong>Притежател</strong></th>
+                                <td th:text="*{owner.username}">Притежател</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <form th:action="@{/addToCart}" th:method="post">
+                        <input type="hidden" name="add" th:value="*{id}" />
+                        <button  type="submit" class="btn  btn-md mr-1 mb-2 waves-effect waves-light buton">Добави в количката</button>
+                    </form>
+                    <form th:action="@{/addToWishList}" th:method="post"  >
+                        <input type="hidden" name="add" th:value="*{id}" />
+
+                        <button  type="submit" class="btn bg-cart"><i class=" fas fa-heart mr-2"></i> Добави в любими</button>
+                    </form>
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+<footer th:replace="fragments/commons::footer"></footer>
+
+
+</body>
+</html>

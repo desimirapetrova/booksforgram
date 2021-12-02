@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head th:fragment="head">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Booksforgram</title>
+    <link rel = "icon" type = "image/png" href = "/images/logo.png">
+
+</head>>
+<body>
+<header th:fragment="header" class="header">
+
+    <div class="header-1">
+        <!--        <h1 style="background-image:url('static/image/logo.jpg')"></h1>-->
+        <a href="/" class="logo">
+            <img src="/images/logo.png">
+            Booksforgram </a>
+
+        <form  th:method="get" th:action="@{/search}" class="search-form">
+            <input type="search" name="searchTerm" placeholder="потърси книга тук..." id="search-box">
+            <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+
+        <div class="icons">
+
+<!--            <a th:method="get" th:action="@{/search}" id="search-btn" class="fas fa-search"></a>-->
+            <a href="/wishlist" class="fas fa-heart"></a>
+            <a href="/shoppingCart" class="fas fa-shopping-cart"></a>
+<!--            TODO-->
+<!--            <th:block th:if="${@currentUser.id == null}">-->
+            <a  sec:authorize="!isAuthenticated()" href="/login"  class="fas fa-user"></a>
+<!--            </th:block>-->
+<!--            <th:block th:unless="${@currentUser.id == null}">-->
+                <a sec:authorize="isAuthenticated()"  th:href="@{/profile}"  class="fas fa-user"></a>
+<!--            </th:block>-->
+        </div>
+
+    </div>
+
+    <div class="header-2">
+        <nav class="navbar nav justify-content-center">
+            <a href="/">Начало</a>
+            <a href="/featured">Всички книги</a>
+<!--            <a href="/arrivals">arrivals</a>-->
+<!--            <a href="/newseller">newseller</a>-->
+            <a href="/blogs">Блог</a>
+<!--            <th:block th:if="${@currentUser.id != null}">-->
+                <a sec:authorize="isAuthenticated()" href="/profile">Моят профил</a>
+                <a sec:authorize="isAuthenticated()"href="/mybooks">Моите книги</a>
+                <a sec:authorize="isAuthenticated()"href="/add-book">Добави книга</a>
+            <th:block sec:authorize="hasRole('ADMIN')">
+                <a  href="/statistics">Statistics</a>
+            </th:block>
+            <a sec:authorize="isAuthenticated()" class="float-right"href="/logout">Излез</a>
+
+        </nav>
+
+    </div>
+
+    <!-- bottom navbar  -->
+    <nav class="bottom-navbar">
+        <a href="/" class="fas fa-home"></a>
+        <a href="/featured" class="fas fa-book-open"></a>
+        <a href="#blogs" class="fas fa-blog"></a>
+        <a sec:authorize="isAuthenticated()" href="/profile" class="fas fa-user"></a>
+        <a sec:authorize="isAuthenticated()"href="/mybooks" class="fas fa-book"></a>
+            <a sec:authorize="isAuthenticated()"class="fas fa-plus" href="/add-book"></a>
+            <a sec:authorize="isAuthenticated()"class="fas fa-sign-out-alt"href="/logout"></a>
+    </nav>
+</header>
+<footer th:fragment="footer" class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <a href="/"> <i class="fas fa-arrow-right"></i> Начало </a>
+            <a href="/featured"> <i class="fas fa-arrow-right"></i> Всички книги </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> Блог </a>
+
+        </div>
+
+        <div class="box">
+            <a sec:authorize="isAuthenticated()" href="/profile"> <i class="fas fa-arrow-right"></i>Моят профил </a>
+            <a sec:authorize="isAuthenticated()"href="/mybooks" > <i class="fas fa-arrow-right"></i> Моите книги </a>
+        </div>
+
+        <div class="box">
+            <h3>Локация</h3>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Bulgaria </a>
+            <img src="images/worldmapbg3.png" class="map" alt="">
+
+        </div>
+        <div class="box">
+            <h3>Контакти</h3>
+            <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> booksforgram@gmail.com </a>
+            <a href="https://www.instagram.com/booksforgram/"> <i class="fab fa-instagram"></i>booksforgram</a>
+
+        </div>
+    </div>
+
+
+
+    <div class="credit"> created by <span>Desimira Petrova</span> | all rights reserved! </div>
+
+</footer>
+</body>
+</html>

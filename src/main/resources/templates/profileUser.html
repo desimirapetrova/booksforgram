@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/commons::head">
+
+</head>
+<body>
+
+<header th:replace="fragments/commons::header" class="header">
+</header>
+<h1 class="heading"> <span>Моят профил</span> </h1>
+<div th:object="${user}"    class="" >
+    <div class="col mb-4 mb-lg-2">
+        <div class=" mb-3" style="border-radius: .5rem;">
+            <div class="row g-0">
+                <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                    <th:block th:if="*{gender.equals(gender.FEMALE)}">
+                        <img
+                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.png"
+                                alt="..."
+                                class="img-fluid my-5"
+                                style="width: 17rem;"/>
+                    </th:block>
+                    <th:block th:unless="*{gender.equals(gender.FEMALE)}">
+                        <img
+                                src="../images/male.png"
+                                alt="..."
+                                class="img-fluid my-5"
+                                style="width: 17rem;"/>
+
+                    </th:block>
+                    <h5 th:text="${user.username}" >Marie Horwitz</h5>
+                    <!--                            <h5 sec:authentication='id' >Marie Horwitz</h5>-->
+                    <p  th:text="${user.first_name +' '+ user.last_name}">Web Designer</p>
+                    <i class="far fa-edit mb-5"></i>
+                </div>
+                <div class="col-md-8 info">
+                    <div class="">
+
+                        <h6>Информация</h6>
+                        <hr class="mt-0 mb-4">
+                        <div class="row pt-1">
+                            <div class="col-6 mb-3">
+                                <h5 >E-mail адрес</h5>
+                                <p th:text="*{email}" class="text-muted">info@example.com</p>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <h5 >Години</h5>
+                                <p th:text="*{age}" class="text-muted">123 456 789</p>
+                                <h5>Пол</h5>
+                                <p   th:text="*{gender.name()}"class="text-muted">123 456 789</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <th:block th:if="${books.size()>=1}">
+                    <h1 class="heading2"> <span>Kниги</span> </h1>
+                        <hr>
+<!--                            <p th:text="${b.name}"></p>-->
+
+
+                            <div class=" d-flex justify-content-center mt-10 mb-10">
+                                <div   th:each="b:${books}" th:object="${b}" class="row">
+                                    <div  class="col-md-4 mt-1">
+                                        <div   class="card" style="min-width: 25rem;" >
+                                            <div class="card-body" style="height: 20rem; min-width: 20rem;">
+                                                <div class="img-fluid"> <img th:src="*{imageUrl}"class="rounded mx-auto d-block" style="height: 20rem;" alt=""> </div>
+                                            </div>
+                                            <div class="card-body bg-light text-center">
+                                                <div class="mb-2">
+                                                    <h6  class="font-weight-semibold mb-2">
+                                                        <a th:text="*{name}" class="text-default mb-2" >Book "MDKFKWF"</a>
+                                                    </h6>
+                                                    <a th:text="*{category.name}" href="#" class="text-muted" data-abc="true">Roman</a>
+                                                </div>
+                                                <h3 th:text="|*{price}лв.|" class="mb-0 font-weight-semibold">$9</h3>
+                                                <div> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> </div>
+                                                <div class="text-muted mb-3">34 reviews</div>
+
+                                                <a th:href="@{/details/{id}(id = *{id})}" class="info">Информация</a>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                    </th:block>
+
+        </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+</body>
+<footer th:replace="fragments/commons::footer"></footer>
+</html>

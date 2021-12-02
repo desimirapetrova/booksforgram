@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::header" class="header">
+</header>
+<section class="add-book">
+<div class="wrapper">
+  <form th:object="${bookModel}"
+        th:action="@{/books/{id}/edit(id=*{id})}"
+        th:method="patch"
+        class="form-add-item">
+    <h2 class="form-add-item-heading">Редактирай</h2>
+    <input th:field="*{name}" th:errorclass="bg-danger"
+           type="text" class="form-control" name="name" placeholder="Заглавие"
+           id="name"/>
+    <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+           class="  rounded"></small>
+    <textarea  th:field="*{description}" th:errorclass="bg-danger" type="text" class="textArea form-control" name="description" placeholder="Описание" />
+    <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+           class=" text-light rounded"></small>
+
+    <input  th:field="*{author}" th:errorclass="bg-danger" type="text" class="form-control" name="author" placeholder="Автор" />
+    <small th:if="${#fields.hasErrors('author')}" th:errors="*{author}"
+           class=" text-light rounded"></small>
+
+    <input  th:field="*{price}" th:errorclass="bg-danger" type="number" class="form-control" name="price" placeholder="Цена" />
+    <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+           class=" text-light rounded"></small>
+
+
+
+    <select  th:field="*{category}" th:errorclass="bg-danger"  class="form-control form-control-lg" name="category">
+      <option   value="" th:selected="*{category}">Избери категория</option>
+      <option th:each="c : ${T(com.example.booksforgram.model.entity.enums.CategoryEnum).values()}" th:value="${c}" th:text="${c}"></option>
+    </select>
+    <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}"
+           class=" text-light rounded"></small>
+
+    <select  th:field="*{condition}" th:errorclass="bg-danger"  class="form-control form-control-lg" name="condition">
+      <option value="" selected>Избери състояние</option>
+      <option th:each="c : ${T(com.example.booksforgram.model.entity.enums.ConditionEnum).values()}" th:value="${c}" th:text="${c}"></option>
+    </select>
+    <small th:if="${#fields.hasErrors('condition')}" th:errors="*{condition}"
+           class=" text-light rounded"></small>
+
+
+    <input th:field="*{imageUrl}" th:errorclass="is-invalid" name="imageUrl"
+           id="imageUrl" type="url" class="form-control"
+           placeholder="Putimage URL here"/>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Промени</button>
+  </form>
+</div>
+</section>
+<footer th:replace="fragments/commons::footer"></footer>
+
+</body>
+</html>

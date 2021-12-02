@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/commons::head"></head>
+<body>
+
+<header th:replace="fragments/commons::header" class="header">
+</header>
+<section class="pad container3">
+    <div class="row">
+        <div class="col-75">
+            <div class="container ">
+                <form th:action="@{/orders}" th:method="post" th:object="${orderBindingModel}">
+
+                    <div    class="row">
+                        <div class="col-50">
+                            <h3>Адрес за доставка</h3>
+                            <label for="fname"><i class="fa fa-user"></i> Име</label>
+                            <input th:field="*{firstName}"type="text" id="fname" name="firstname" placeholder="">
+                            <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                                   class="  rounded"></small>
+                            <label for="lname"><i class="fa fa-user"></i>Фамилия</label>
+                            <input th:field="*{lastName}" type="text" id="lname" name="lastname" placeholder="">
+                            <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                                   class="  rounded"></small>
+                            <label for="email"><i class="fa fa-envelope"></i> Email адрес</label>
+                            <input th:field="*{email}"type="text" id="email" name="email" placeholder="">
+                            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                   class="  rounded"></small>
+                            <label for="phoneNumber"><i class="fa fa-phone"></i> Телефонен номер</label>
+                            <input th:field="*{phoneNumber}"type="text" id="phoneNumber" name="phoneNumber" placeholder="">
+                            <small th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"
+                                   class="  rounded"></small>
+                            <label for="adr"><i class="fa fa-address-card-o"></i> Адрес</label>
+                            <input th:field="*{address}"type="text" id="adr" name="address" placeholder="">
+                            <small th:if="${#fields.hasErrors('address')}" th:errors="*{address}"
+                                   class="  rounded"></small>
+                            <label for="city"><i class="fa fa-institution"></i> Град</label>
+                            <input th:field="*{city}"type="text" id="city" name="city" placeholder="">
+                            <small th:if="${#fields.hasErrors('city')}" th:errors="*{city}"
+                                   class="  rounded"></small>
+                            <div class="row">
+                                <div class="col-50">
+                                    <label for="zip">Код на града</label>
+                                    <input th:field="*{zip}" type="text" id="zip" name="zip" placeholder="">
+                                    <small th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"
+                                           class="  rounded"></small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-50">
+                            <h3>Плащане</h3>
+                            <label for="cname">Притежател на картата</label>
+                            <input th:field="*{cardName}"type="text" id="cname" name="cardname" placeholder="">
+                            <small th:if="${#fields.hasErrors('cardName')}" th:errors="*{cardName}"
+                                   class="  rounded"></small>
+                            <label for="ccnum">Номер на картата</label>
+                            <input th:field="*{cardNumber}"type="text" id="ccnum" name="cardnumber" placeholder="">
+                            <small th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}"
+                                   class="  rounded"></small>
+                            <label for="expmonth">Валидна до месец:</label>
+                            <input th:field="*{expMonth}" type="text" id="expmonth" name="expmonth" placeholder="">
+                            <small th:if="${#fields.hasErrors('expMonth')}" th:errors="*{expMonth}"
+                                   class="  rounded"></small>
+                            <div class="row">
+                                <div class="col-50">
+                                    <label for="expyear">Валидна до година:</label>
+                                    <input  th:field="*{expYear}"type="text" id="expyear" name="expyear" placeholder="">
+                                    <small th:if="${#fields.hasErrors('expYear')}" th:errors="*{expYear}"
+                                           class="  rounded"></small>
+                                </div>
+                                <div class="col-50">
+                                    <label for="cvv">CVV</label>
+                                    <input th:field="*{CVV}" type="text" id="cvv" name="cvv" placeholder="">
+                                    <small th:if="${#fields.hasErrors('CVV')}" th:errors="*{CVV}"
+                                           class="  rounded"></small>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+<!--                    <label>-->
+<!--                        <input type="checkbox" checked="checked" name="sameadr"> Адрес на доста-->
+<!--                    </label>-->
+                    <input type="submit" value="Continue to checkout" class="btn">
+                </form>
+            </div>
+        </div>
+
+        <div class="col-25">
+            <div   class="container">
+                <h4>Количка
+                    <span class="price" style="color:black">
+          <i class="fa fa-shopping-cart"></i>
+          <b
+          th:text="${orders.size()}">4</b>
+        </span>
+                </h4 >
+                <p  th:each="order : ${orders}" th:object="${order}"><a th:text="*{name}" th:href="@{/details/{id}(id = *{id})}">Продукт 1</a> <span th:text="|*{price} лв.|" class="price">$15</span></p>
+<!--                <p><a href="#">Product 2</a> <span class="price">$5</span></p>-->
+<!--                <p><a href="#">Product 3</a> <span class="price">$8</span></p>-->
+<!--                <p><a href="#">Product 4</a> <span class="price">$2</span></p>-->
+                <hr>
+                <p>Финална сума: <span    th:text="|${#aggregates.sum(orders.![price])} лв.|" class="price" style="color:black"><b>$30</b></span></p>
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:replace="fragments/commons::footer"></footer>
+
+</body>
+</html>

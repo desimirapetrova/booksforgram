@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+
+<header th:replace="fragments/commons::header" class="header">
+</header>
+<section class="home2" id="home">
+
+    <div class="row blur">
+        <div class="content">
+            <h6 class="font-italic font-weight-light "> „Ние сме на мнение, че вместо да оставяме книгите да мухлясват зад желязна решетка, далеч от просташки погледи, по-добре е да ги оставим да се износват, като хората ги четат.“
+               </h6><h6 class=" font-italic font-weight-light"> – Жул Верн</h6>
+
+            <h4 class="share ]align-self-center">Споделени своите знания</h4>
+            <a href="/add-book" class=" mybtnadd">Добави книга</a>
+        </div>
+    </div>
+</section>
+<section class="home3">
+
+    <h5 class="text-center mt-5 mb-0">Избери своята категория</h5>
+    <!-- Grid row -->
+    <div class="row mt-5">
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-3 mb-4">
+
+            <!-- Card -->
+            <div class="">
+
+                <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid rounded-circle" src="images/m4.jpg"  alt="Sample">
+                    <a th:href="@{/categories(id =6)}" class="text-dark">
+                        <div class="mask waves-effect waves-light">
+                            <div class="d-flex justify-content-center align-items-center h-100 p-3">
+                                <h5 class="border border-warning mb-0 p-2">Мистерия</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Card -->
+
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-3 mb-4">
+
+            <!-- Card -->
+            <div class="">
+
+                <div class="view zoom z-depth-2 rounded">
+                    <img  class="img-fluid rounded-circle" src="images/novel.jpg" alt="Sample">
+                    <a th:href="@{/categories(id =1)}" class="text-dark">
+                        <div class="mask waves-effect waves-light">
+                            <div class="d-flex justify-content-center align-items-center h-100 p-3">
+                                <h5  class="border border-warning mb-0 p-2">Роман</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Card -->
+
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-3 mb-4">
+
+            <!-- Card -->
+            <div class="">
+
+                <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid"  src="images/witch.jpg" alt="Sample">
+                    <a th:href="@{/categories(id =3)}" class="text-dark">
+                        <div class="mask waves-effect waves-light">
+                            <div class="d-flex justify-content-center align-items-center h-100 p-3">
+                                <h5 class="border border-warning mb-0 p-2">Фентъзи</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Card -->
+
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-3 mb-4">
+
+            <!-- Card -->
+            <div class="">
+
+                <div class="view rounded">
+                    <img class="img-fluid rounded-circle" src="images/raket.jpg" alt="Sample">
+                    <a th:href="@{/categories(id =2)}" class="text-dark">
+                        <div class="mask waves-effect waves-light">
+                            <div class="d-flex justify-content-center align-items-center h-100 p-3">
+                                <h5 class="border border-warning mb-0 p-2">Фантастика</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Card -->
+
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-3 mb-4">
+
+            <!-- Card -->
+            <div class="">
+
+                <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid rounded-circle" src="images/psy.jpg" alt="Sample">
+                    <a th:href="@{/categories(id =4)}" class="text-dark">
+                        <div class="mask waves-effect waves-light">
+                            <div class="d-flex justify-content-center align-items-center h-100 p-3">
+                                <h5 class="border border-warning mb-0 p-2">Психология</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Card -->
+
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-3 mb-4">
+
+            <!-- Card -->
+            <div class="">
+
+                <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid rounded-circle" src="images/scary3.jpg" alt="Sample">
+                    <a th:href="@{/categories(id =5)}" class="text-dark">
+                        <div class="mask waves-effect waves-light">
+                            <div class="d-flex justify-content-center align-items-center h-100 p-3">
+                                <h5 class="border border-warning mb-0 p-2">Ужаси</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Card -->
+
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-3 mb-4">
+
+            <!-- Card -->
+            <div class="">
+
+                <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid rounded-circle" src="images/detective.jpg" alt="Sample">
+                    <a th:href="@{/categories(id =8)}" class="text-dark">
+                        <div class="mask waves-effect waves-light">
+                            <div class="d-flex justify-content-center align-items-center h-100 p-3">
+                                <h5 class="border border-warning mb-0 p-2">Криминални</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Card -->
+
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-3 mb-4">
+
+            <!-- Card -->
+            <div class="">
+
+                <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid rounded-circle" src="images/bio2.jpg" alt="Sample">
+                    <a th:href="@{/categories(id =7)}" class="text-dark">
+                        <div class="mask waves-effect waves-light">
+                            <div class="d-flex justify-content-center align-items-center h-100 p-3">
+                                <h5 class="border border-warning mb-0 p-2">Биография</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Card -->
+
+        </div>
+        <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+</section>
+
+<section class="newsletter">
+
+    <form th:action="@{/newsletter}" th:method="post" th:object="${emailBindingModel}">
+        <h3>Запиши се за нашия онлайн бюлетин и научи първи за промоционални и нови книги.</h3>
+        <input th:field="*{email}" th:errorclass="bg-danger" type="email" name="" placeholder="Въведи своя имейл" id="" class="box">
+        <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+               class=" text-light rounded"></small>
+        <input  type="submit" value="Абонирай се" class="btn">
+        <div th:if="${usernameError}" class="invalid-feedback" th:text="${usernameError}"></div>
+
+<!--        <p th:each="email:${allEmails}" th:text="*{email}"/>-->
+    </form>
+
+</section>
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>
