@@ -350,10 +350,21 @@ footer{
     flex-wrap: wrap;
     gap:1.5rem;
 }
+.deal2{
+    background:#f3f3f3;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap:1.5rem;
+}
 
 .deal .content{
     flex:1 1 42rem;
 }
+.deal2 .content{
+    flex:1 1 42rem;
+}
+
 
 .deal .image{
     flex:1 1 42rem;
@@ -361,6 +372,10 @@ footer{
 
 .deal .image img{
     width: 100%;
+}
+.deal2 .image img {
+    width: 100%;
+    margin-bottom: 4rem;
 }
 
 .deal .content h3{
@@ -1102,4 +1117,8 @@ label{
 }
 textarea{
     margin-top: 2rem;
+}
+.h4, h4 {
+    font-size: 1.5rem;
+    padding: 1rem;
 }

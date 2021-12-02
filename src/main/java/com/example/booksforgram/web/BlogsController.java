@@ -6,7 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class BlogsController {
     @GetMapping("/blogs")
-    public String getBlgos(){
+    public String getBlogs(){
         return "blogs";
     }
-}
+    @GetMapping("/blog")
+    public String getBlog(){
+            return "blog";
+        }
+    }
