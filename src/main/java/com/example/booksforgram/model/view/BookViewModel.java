@@ -2,6 +2,7 @@ package com.example.booksforgram.model.view;
 
 import com.example.booksforgram.model.entity.Category;
 import com.example.booksforgram.model.entity.Condition;
+import com.example.booksforgram.model.entity.Picture;
 import com.example.booksforgram.model.entity.User;
 import com.example.booksforgram.model.entity.enums.CategoryEnum;
 import com.example.booksforgram.model.entity.enums.ConditionEnum;
@@ -24,6 +25,8 @@ public class BookViewModel {
 
     public BookViewModel() {
     }
+
+
 
     public void setPrice(Integer price) {
         this.price = price;

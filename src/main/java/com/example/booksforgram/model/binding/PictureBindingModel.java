@@ -7,6 +7,7 @@ public class PictureBindingModel {
     private String title;
     private MultipartFile picture;
 
+
     public String getTitle() {
         return title;
     }
@@ -15,6 +16,8 @@ public class PictureBindingModel {
         this.title = title;
         return this;
     }
+
+
 
     public MultipartFile getPicture() {
         return picture;

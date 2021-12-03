@@ -72,7 +72,7 @@
 <!--                <a sec:authorize="isAuthenticated()"href="/mybooks">Моите книги</a>-->
                 <a sec:authorize="isAuthenticated()"href="/add-book">Добави книга</a>
             <th:block sec:authorize="hasRole('ADMIN')">
-                <a  href="/statistics">Statistics</a>
+                <a  href="/statistics">Статистика</a>
             </th:block>
             <a sec:authorize="isAuthenticated()" class="float-right"href="/logout">Излез</a>
 
@@ -84,9 +84,8 @@
     <nav class="bottom-navbar">
         <a href="/" class="fas fa-home"></a>
         <a href="/featured" class="fas fa-book-open"></a>
-        <a href="#blogs" class="fas fa-blog"></a>
+        <a sec:authorize="isAuthenticated()"  href="/blogs" class="fas fa-blog"></a>
         <a sec:authorize="isAuthenticated()" href="/profile" class="fas fa-user"></a>
-        <a sec:authorize="isAuthenticated()"href="/mybooks" class="fas fa-book"></a>
             <a sec:authorize="isAuthenticated()"class="fas fa-plus" href="/add-book"></a>
             <a sec:authorize="isAuthenticated()"class="fas fa-sign-out-alt"href="/logout"></a>
     </nav>

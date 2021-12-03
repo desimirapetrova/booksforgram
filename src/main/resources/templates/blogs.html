@@ -5,32 +5,36 @@
 <body>
 <header th:replace="fragments/commons::header" class="header">
 </header>
-<div class="blogs" id="blogs">
+<div class="blogs" id="blogs" style=" text-align: -webkit-center;">
 
   <h1 class="heading"> <span>Нашия блог</span> </h1>
+<!--<form  th:action="@{/add}" method="get">-->
+<!--  <button class="btn  btn-primary " style=" text-align: -webkit-center;">Добави блог</button>-->
 
+<!--</form>-->
+  <a href="/add" class="btn btn-primary" style="margin-bottom:2rem ">Добави блог</a>
 
-      <div class="justify-content-sm-center swiper-slide box" style=" text-align: -webkit-center;">
+  <div class="justify-content-sm-center swiper-slide box border" style=" text-align: -webkit-center; margin-top: 2rem min-width: 50rem;max-width: 60rem">
         <div class="image">
-          <img src="images/sknigavruka.jpg" width="450rem" height="520rem" alt="">
+          <img src="images/sknigavruka.jpg" min-width="300rem" max-width="450rem" height="520rem" alt="">
         </div>
         <div class="content">
           <h3>#скнигавръка</h3>
           <p>📚Искаме да споделим с вас една замисъл и не само , а именно това :</p>
-          <a href="/blog" class="btn">Прочети</a>
+          <a href="/myblog" class="btn btn-primary">Прочети</a>
         </div>
       </div>
 
-<!--      <div class="swiper-slide box">-->
-<!--        <div class="image">-->
-<!--          <img src="image/blog-2.jpg" alt="">-->
-<!--        </div>-->
-<!--        <div class="content">-->
-<!--          <h3>blog title goes here</h3>-->
-<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, odio.</p>-->
-<!--          <a href="#" class="btn">read more</a>-->
-<!--        </div>-->
-<!--      </div>-->
+      <div  th:each="b:${blogs}" th:object="${b}" class="justify-content-sm-center swiper-slide box border"  style=" text-align: -webkit-center; margin-top: 2rem;min-width: 50rem;max-width: 60rem">
+        <div class="image">
+          <img  th:src="*{picture.getUrl()}" width="350rem"  height="400rem"alt="">
+        </div>
+        <div class="content">
+          <h3 th:text="*{title}">blog title goes here</h3>
+<!--          <p th:text="*{description.}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, odio.</p>-->
+          <a th:href="@{/blog/{id}(id = *{id})}"  class="btn btn-primary">Прочети</a>
+        </div>
+      </div>
 
 <!--      <div class="swiper-slide box">-->
 <!--        <div class="image">-->

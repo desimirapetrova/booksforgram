@@ -1,7 +1,9 @@
 package com.example.booksforgram.model.binding;
 
+import com.example.booksforgram.model.entity.Picture;
 import com.example.booksforgram.model.entity.enums.CategoryEnum;
 import com.example.booksforgram.model.entity.enums.ConditionEnum;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
 
@@ -21,11 +23,10 @@ public class AddBookBindingModel {
     @Size(min = 3,message = "Името трябва да съдържа поне 3 символа.")
     @NotEmpty(message = "Въведете име автора")
     private String author;
-
     private String imageUrl;
-
     public AddBookBindingModel() {
     }
+
 
 
     public String getImageUrl() {

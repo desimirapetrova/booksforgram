@@ -1,6 +1,8 @@
 package com.example.booksforgram.service.impl;
 
+import com.example.booksforgram.model.binding.PictureBindingModel;
 import com.example.booksforgram.model.entity.Book;
+import com.example.booksforgram.model.entity.Picture;
 import com.example.booksforgram.model.entity.Role;
 import com.example.booksforgram.model.entity.User;
 import com.example.booksforgram.model.entity.enums.UserRoleEnum;
@@ -8,14 +10,13 @@ import com.example.booksforgram.model.service.BookServiceModel;
 import com.example.booksforgram.model.service.BookUpdateServiceModel;
 import com.example.booksforgram.model.view.BookViewModel;
 import com.example.booksforgram.repository.*;
-import com.example.booksforgram.service.BookService;
-import com.example.booksforgram.service.CategoryService;
-import com.example.booksforgram.service.ConditionService;
+import com.example.booksforgram.service.*;
 import com.example.booksforgram.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,9 +29,11 @@ public class BookServiceImpl implements BookService {
     private final ConditionRepository conditionRepository;
     private final CategoryService categoryService;
     private final ConditionService conditionService;
+    private final CloudinaryService cloudinaryService;
     private final UserRepository userRepository;
+    private final PictureRepository pictureRepository;
 
-    public BookServiceImpl(BookRepository bookRepository, ModelMapper modelMapper, CategoryRepository categoryRepository, ConditionRepository conditionRepository, CategoryService categoryService, ConditionService conditionService, UserRepository userRepository) {
+    public BookServiceImpl(BookRepository bookRepository, ModelMapper modelMapper, CategoryRepository categoryRepository, ConditionRepository conditionRepository, CategoryService categoryService, ConditionService conditionService, CloudinaryService cloudinaryService, UserRepository userRepository, PictureRepository pictureRepository) {
         this.bookRepository = bookRepository;
         this.modelMapper = modelMapper;
 
@@ -38,19 +41,26 @@ public class BookServiceImpl implements BookService {
         this.conditionRepository = conditionRepository;
         this.categoryService = categoryService;
         this.conditionService = conditionService;
+        this.cloudinaryService = cloudinaryService;
         this.userRepository = userRepository;
+        this.pictureRepository = pictureRepository;
     }
 
 
 
     @Override
-    public BookServiceModel addBook(BookServiceModel bookServiceModel,String owner) {
+    public BookServiceModel addBook(BookServiceModel bookServiceModel,String owner) throws IOException {
+//        MultipartFile img = bookServiceModel.getImage();
+
+
         Book book=modelMapper.map(bookServiceModel,Book.class);
         book.setOwner(userRepository.findByUsername(owner).orElse(null));
         book.setCategory(categoryService.findByCategoryEnum(bookServiceModel.getCategory()));
         book.setQuantity(1);
+//        book.setPictures(createPictureEntity(img));
         book.setCondition(conditionService.findByConditionEnum(bookServiceModel.getCondition()));
-         Book savedBook=bookRepository.save(book);
+        Book savedBook=bookRepository.save(book);
+
         return modelMapper.map(savedBook,BookServiceModel.class);
     }
 
@@ -217,6 +227,8 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAllByOwner_Id(id);
     }
 
+
+
     public boolean isOwner(String userName, Long id) {
         Optional<Book> bookOptional = bookRepository.
                 findById(id);
@@ -252,7 +264,26 @@ public class BookServiceImpl implements BookService {
         bookViewModel.setAuthor(book.getAuthor());
         bookViewModel.setCondition(book.getCondition().getName());
         bookViewModel.setCategory(book.getCategory().getName());
+//        bookViewModel.setPicture(book.getPictures());
         return bookViewModel;
     }
+    private Picture createPictureEntity(MultipartFile file) throws IOException {
+        final CloudinaryImage uploaded = this.cloudinaryService.upload(file);
+        Picture picture=new Picture();
+        picture.setPublicId(uploaded.getPublicId());
+        picture.setUrl(uploaded.getUrl());
+        return pictureRepository.save(picture);
+//        return picture;
+    }
+    //    private Picture getPictureEntity(MultipartFile img) throws IOException {
+//        if (!"".equals(img.getOriginalFilename())) {
+//            final CloudinaryImage uploaded = cloudinaryService.upload(img);
+//            return pictureRepository.save(new Picture()
+//                    .setUrl(uploaded.getUrl())
+//                    .setPublicId(uploaded.getPublicId()));
+//        } else {
+//            return pictureRepository.save(new Picture(DEFAULT_BOOK_IMAGE_URL));
+//        }
+//    }
 
 }

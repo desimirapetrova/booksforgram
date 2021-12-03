@@ -1,12 +1,7 @@
 package com.example.booksforgram.model.entity;
 
-import org.apache.tomcat.jni.File;
-import org.apache.tomcat.util.http.fileupload.FileUpload;
 
 import javax.persistence.*;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.nio.file.Files;
 import java.util.List;
 
 @Entity
@@ -31,11 +26,22 @@ public class Book extends BaseEntity{
     @Column( columnDefinition = "TEXT")
     private String imageUrl;
 
+//    @OneToOne
+//    private Picture pictures;
+
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     private List<Comment> comments;
 
     public Book() {
     }
+
+//    public Picture getPictures() {
+//        return pictures;
+//    }
+//
+//    public void setPictures(Picture pictures) {
+//        this.pictures = pictures;
+//    }
 
     public List<Comment> getComments() {
         return comments;

@@ -9,6 +9,7 @@
 <div class="wrapper">
     <form th:action="@{/add-book}" th:method="post"
           th:object="${addBookBindingModel}"
+          enctype="multipart/form-data"
           class="form-add-item">
         <h2 class="form-add-item-heading">Добави книга</h2>
         <input th:field="*{name}" th:errorclass="bg-danger"
@@ -49,23 +50,12 @@
         <input th:field="*{imageUrl}" th:errorclass="is-invalid" name="imageUrl"
                id="imageUrl" type="url" class="form-control"
                placeholder="Putimage URL here"/>
-<!--        <h1>Choose picture</h1>-->
-<!--        <form-->
-<!--                th:action="@{/pictures/add}"-->
-<!--                th:method="post"-->
-<!--                enctype="multipart/form-data">-->
-
-<!--            <input type="text" name="title"/><br/>-->
-<!--            <input name="picture" type="file"/><br>-->
-<!--            <input type="submit" value="Submit"/>-->
-
-<!--        </form>-->
-
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Добави</button>
     </form>
 </div>
 </section>
+
 <footer th:replace="fragments/commons::footer"></footer>
 
 </body>

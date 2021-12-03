@@ -2,17 +2,19 @@ package com.example.booksforgram.web;
 
 import com.example.booksforgram.model.binding.AddBookBindingModel;
 import com.example.booksforgram.model.binding.BookUpdateBindingModel;
-import com.example.booksforgram.model.entity.User;
+import com.example.booksforgram.model.binding.LoginBindingModel;
+import com.example.booksforgram.model.binding.PictureBindingModel;
+import com.example.booksforgram.model.entity.Picture;
 import com.example.booksforgram.model.service.BookServiceModel;
 import com.example.booksforgram.model.service.BookUpdateServiceModel;
 import com.example.booksforgram.model.view.BookViewModel;
+import com.example.booksforgram.repository.PictureRepository;
 import com.example.booksforgram.service.BookService;
-import com.example.booksforgram.service.FileUploadService;
-import com.example.booksforgram.service.impl.BooksforgramUser;
+import com.example.booksforgram.service.CloudinaryImage;
+import com.example.booksforgram.service.CloudinaryService;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,9 +31,14 @@ import java.security.Principal;
 public class BookController {
     private final BookService bookService;
     private final ModelMapper modelMapper;
-    public BookController(BookService bookService, ModelMapper modelMapper) {
+    private final PictureRepository pictureRepository;
+    private final CloudinaryService cloudinaryService;
+
+    public BookController(BookService bookService, ModelMapper modelMapper, PictureRepository pictureRepository, CloudinaryService cloudinaryService) {
         this.bookService = bookService;
         this.modelMapper = modelMapper;
+        this.pictureRepository = pictureRepository;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @GetMapping("/add-book")
@@ -39,7 +46,8 @@ public class BookController {
         return "add-book";
     }
     @PostMapping("/add-book")
-    public String addConfirm(@Valid AddBookBindingModel addBookBindingModel, BindingResult bindingResult,
+    public String addConfirm(@Valid AddBookBindingModel addBookBindingModel,@Valid PictureBindingModel bindingModel,
+                             BindingResult bindingResult,
                              RedirectAttributes redirectAttributes, Principal user) throws IOException {
 
         if (bindingResult.hasErrors()) {
@@ -48,13 +56,15 @@ public class BookController {
 
             return "redirect:add-book";
         }
-//        BookServiceModel bookServiceModel=modelMapper
-//                .map(addBookBindingModel, BookServiceModel.class);
-//       bookServiceModel
-//               .setPicture(new String(addBookBindingModel.getPicture().getBytes()));
-//        fileUploadService.upload(multipartFile);
+
+//        var picture = createPictureEntity(bindingModel.getPicture(),
+//                bindingModel.getTitle());
+//
+//        pictureRepository.save(picture);
+
         BookServiceModel bookServiceModel=bookService.addBook(modelMapper
                 .map(addBookBindingModel, BookServiceModel.class), user.getName());
+
     return "redirect:/details/" + bookServiceModel.getId() ;
 
     }
@@ -113,9 +123,10 @@ public class BookController {
         return "redirect:/mybooks";
     }
 
-
     @ModelAttribute
     public AddBookBindingModel addBookBindingModel(){
-        return  new AddBookBindingModel();
+        return new AddBookBindingModel();
     }
+
+
 }

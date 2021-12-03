@@ -1,7 +1,9 @@
 package com.example.booksforgram.model.service;
 
+import com.example.booksforgram.model.entity.Picture;
 import com.example.booksforgram.model.entity.enums.CategoryEnum;
 import com.example.booksforgram.model.entity.enums.ConditionEnum;
+import org.springframework.web.multipart.MultipartFile;
 
 public class BookServiceModel {
     private Long id;
@@ -17,6 +19,8 @@ public class BookServiceModel {
 
     public BookServiceModel() {
     }
+
+
 
     public Integer getQuantity() {
         return quantity;
