@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::header" class="header">
+</header>
+<section class="add-book">
+  <div class="wrapper">
+    <form th:action="@{/add}" th:method="post"
+          th:object="${addBlogBindingModel}"
+          enctype="multipart/form-data"
+          class="form-add-item">
+      <h2 class="form-add-item-heading">Добави блог</h2>
+      <input th:field="*{title}" type="text" class="form-control" name="title" placeholder="Заглавие"
+             id="name"/>
+      <textarea  th:field="*{description}" th:errorclass="bg-danger" type="text" class="textArea form-control" name="description" placeholder="Описание" />
+      <div class="form-group">
+        <label for="image" class="col-form-label  font-weight-bold">Изберете снимка</label>
+        <input th:field="*{picture}"
+               th:errorclass="is-invalid"
+               id="image"
+               name="image"
+               type="file"
+               accept=".jpg, .jpeg, .png"
+               class="form-control-file rounded"
+               aria-describedby="imageError"/>
+        <small th:if="${#fields.hasErrors('picture')}" th:errors="*{picture}"
+               id="imageError"
+               class="invalid-feedback errors alert alert-danger">
+          Image is required.
+        </small>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Добави</button>
+    </form>
+  </div>
+</section>
+
+<footer th:replace="fragments/commons::footer"></footer>
+
+</body>
+</html>
