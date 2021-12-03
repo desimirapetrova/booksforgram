@@ -72,7 +72,7 @@ public class BlogsController {
 
 //        bookAddServiceModel.setCreator(principal.getUsername());
 
-        Long bookId = blogService.add(addBlogServiceModel);
+        Long bookId = blogService.add(addBlogServiceModel,principal.getName());
 
 //        redirectAttributes.addFlashAttribute("addedSuccessfully", true);
         return "redirect:/blogs";

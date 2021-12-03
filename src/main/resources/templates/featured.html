@@ -27,8 +27,7 @@
                         <a th:text="*{category.name}" th:href="@{/categories(id =${b.category.getId()})}" class="text-muted" data-abc="true">Roman</a>
                     </div>
                     <h3 th:text="|*{price}лв.|" class="mb-0 font-weight-semibold">$9</h3>
-                    <div> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> </div>
-                    <div class="text-muted mb-3">34 reviews</div>
+
                     <th:block th:if="${user!=null}">
                     <th:block th:if="${b.owner.username==user.username}"   >
 

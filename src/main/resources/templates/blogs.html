@@ -14,7 +14,7 @@
 <!--</form>-->
   <a href="/add" class="btn btn-primary" style="margin-bottom:2rem ">Добави блог</a>
 
-  <div class="justify-content-sm-center swiper-slide box border" style=" text-align: -webkit-center; margin-top: 2rem min-width: 50rem;max-width: 60rem">
+  <div class="justify-content-sm-center swiper-slide box border blogs2" style=" text-align: -webkit-center; margin-top: 2rem min-width: 50rem;max-width: 60rem">
         <div class="image">
           <img src="images/sknigavruka.jpg" min-width="300rem" max-width="450rem" height="520rem" alt="">
         </div>
@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <div  th:each="b:${blogs}" th:object="${b}" class="justify-content-sm-center swiper-slide box border"  style=" text-align: -webkit-center; margin-top: 2rem;min-width: 50rem;max-width: 60rem">
+      <div  th:each="b:${blogs}" th:object="${b}" class="justify-content-sm-center swiper-slide box border blogs2"  style=" text-align: -webkit-center; margin-top: 2rem;min-width: 50rem;max-width: 60rem">
         <div class="image">
           <img  th:src="*{picture.getUrl()}" width="350rem"  height="400rem"alt="">
         </div>

@@ -10,62 +10,172 @@
 </header>
 <main>
 
-    <div th:each="result:${searchResult}" th:object="${result}" class="container">
+<!--    <div th:each="result:${searchResult}" th:object="${result}" class="container">-->
 
-        <!--Section: Block Content-->
-        <section class="details my-5">
+<!--        &lt;!&ndash;Section: Block Content&ndash;&gt;-->
+<!--        <section class="details my-5">-->
 
-            <div  class="row">
-                <div class="col-md-5 mb-4 mb-md-0">
+<!--            <div  class="row">-->
+<!--                <div class="col-md-5 mb-4 mb-md-0">-->
 
-                    <div class="view zoom z-depth-2 rounded">
-                        <div class="card-img-actions center"> <img th:src="*{imageUrl}" width="250" height="320" alt=""> </div>
-                        <a href="#!">
-                            <div class="mask waves-effect waves-light"></div>
-                        </a>
+<!--                    <div class="view zoom z-depth-2 rounded">-->
+<!--                        <div class="card-img-actions center"> <img th:src="*{imageUrl}" width="250" height="320" alt=""> </div>-->
+<!--                        <a href="#!">-->
+<!--                            <div class="mask waves-effect waves-light"></div>-->
+<!--                        </a>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--                <div  class="col-md-7">-->
+
+<!--                    <h5 class=" titleName"  th:text="*{name}" >Name of product</h5>-->
+<!--                    <p th:text="*{author}"class="mb-2">Author</p>-->
+<!--                    <p><span class="mr-1"><strong th:text="|*{price} лв.|">$79.99</strong></span></p>-->
+<!--                    <p th:text="*{description}" class="pt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit-->
+<!--                        error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam.</p>-->
+<!--                    <div class="table-responsive">-->
+<!--                        <table class="table table-sm table-borderless mb-0">-->
+<!--                            <tbody>-->
+<!--                            <tr>-->
+<!--                                <th  class="pl-0 w-25" scope="row"><strong>Категория</strong></th>-->
+<!--                                <td th:text="*{category.name}">CATEGORY</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th class="pl-0 w-25" scope="row"><strong>Състояние</strong></th>-->
+<!--                                <td th:text="*{condition.name}">CONDITION</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th class="pl-0 w-25" scope="row"><strong>Притежател</strong></th>-->
+<!--                                <td th:text="*{owner.username}">Притежател</td>-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                    <hr>-->
+<!--                    <form th:action="@{/addToCart}" th:method="post">-->
+<!--                        <input type="hidden" name="add" th:value="*{id}" />-->
+<!--                        <button  type="submit" class="btn  btn-md mr-1 mb-2 waves-effect waves-light buton">Добави в количката</button>-->
+<!--                    </form>-->
+<!--                    <form th:action="@{/addToWishList}" th:method="post"  >-->
+<!--                        <input type="hidden" name="add" th:value="*{id}" />-->
+
+<!--                        <button  type="submit" class="btn bg-cart"><i class=" fas fa-heart mr-2"></i> Добави в любими</button>-->
+<!--                    </form>-->
+<!--            </div>-->
+
+<!--        </section>-->
+
+<!--    </div>-->
+<!--    <div class="container d-flex justify-content-center mt-50 mb-50">-->
+<!--        <div class="row">-->
+<!--            <div th:each="b:${searchResult}" th:object="${b}"  th:if="${b.quantity>0}" class="col-md-4 mt-2">-->
+<!--                <div    class="card">-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="card-img-actions center"> <img th:src="*{getImageUrl()}"class="img-fluid2 img-fluid" style="min-width: 275px;min-height: 400px;" alt=""> </div>-->
+<!--                    </div>-->
+<!--                    <div class="iconss">-->
+<!--                        <a th:href="@{/details/{id}(id = *{id})}" class="fas fa-info-circle" > детайли </a>-->
+
+<!--                    </div>-->
+<!--                    <div class="card-body bg-light text-center">-->
+<!--                        <div class="mb-2">-->
+<!--                            <h6  class="font-weight-semibold mb-2">-->
+<!--                                <a th:text="*{name}" class="text-default mb-2" >Book "MDKFKWF"</a>-->
+<!--                            </h6>-->
+<!--                            <a th:text="*{category.name}" th:href="@{/categories(id =${b.category.getId()})}" class="text-muted" data-abc="true">Roman</a>-->
+<!--                        </div>-->
+<!--                        <h3 th:text="|*{price}лв.|" class="mb-0 font-weight-semibold">$9</h3>-->
+<!--                        <th:block th:if="${user!=null}">-->
+<!--                            <th:block th:if="${b.owner.username==user.username}"   >-->
+
+<!--                                <a th:href="@{/books/{id}/edit(id=*{id})}" type="submit" class="btn bg-cart"><i class="fa  mr-2"></i> Редактирай</a>-->
+<!--                                <form th:action="@{/books/{id}(id=*{id})}" th:method="delete">-->
+<!--                                    <input type="submit" class="btn  bg-danger" value="Изтрий"/>-->
+<!--                                </form>-->
+<!--                            </th:block>-->
+<!--                            &lt;!&ndash;                    <th:block  sec:authorize="hasRole('ADMIN')" >&ndash;&gt;-->
+<!--                            &lt;!&ndash;                        <a th:href="@{/books/{id}/edit(id=*{id})}" type="submit" class="btn bg-cart"><i class="fa  mr-2"></i> Редактирай</a>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                        <form th:action="@{/books/{id}(id=*{id})}" th:method="delete">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <input type="submit" class="btn  bg-danger" value="Изтрий"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                        </form>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                    </th:block>&ndash;&gt;-->
+
+<!--                            <th:block th:unless="${b.owner.username==user.username}" >-->
+<!--                                <th:block sec:authorize="hasRole('USER')">-->
+<!--                                    <form th:action="@{/addToCart}" th:method="post"  >-->
+<!--                                        <input type="hidden" name="add" th:value="*{id}" />-->
+
+<!--                                        <button  type="submit" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i>Добави в количката</button>-->
+<!--                                    </form>-->
+<!--                                    <form th:action="@{/addToWishList}" th:method="post"  >-->
+<!--                                        <input type="hidden" name="add" th:value="*{id}" />-->
+<!--                                        <button  type="submit" class="btn bg-cart"><i class=" fas fa-heart mr-2"></i> Добави в любими</button>-->
+
+<!--                                    </form>-->
+<!--                                </th:block>-->
+<!--                                <th:block sec:authorize="hasRole('ADMIN')">-->
+<!--                                    <a th:href="@{/books/{id}/edit(id=*{id})}" type="submit" class="btn bg-cart"><i class="fa  mr-2"></i> Редактирай</a>-->
+<!--                                    <form th:action="@{/books/{id}(id=*{id})}" th:method="delete">-->
+<!--                                        <input type="submit" class="btn  bg-danger" value="Изтрий"/>-->
+<!--                                    </form>-->
+
+<!--                                </th:block>-->
+<!--                                </form>-->
+<!--                            </th:block>-->
+<!--                        </th:block>-->
+
+<!--                    </div>-->
+
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+
+<!--    </div>-->
+
+    <div class="container d-flex justify-content-center mt-50 mb-50">
+        <div class="row">
+            <div th:each="b: ${searchResult}"  th:object="${b}"    class="col-md-4 mt-2">
+                <th:block th:if="*{quantity>0}">
+                <div  th:if="${searchResult.size()>0}"   class="card">
+                    <div class="card-body">
+                        <div class="card-img-actions center"> <img th:src="*{imageUrl}"class="img-fluid2 img-fluid"  alt=""> </div>
+                    </div>
+                    <div class="iconss">
+                        <a th:href="@{/details/{id}(id = *{id})}" class="fas fa-info"></a>
+                        <!--                    <form th:action="@{/addToWishList}" th:method="post"  >-->
+                        <!--                        <input type="hidden" name="add" th:value="*{id}" />-->
+                        <!--                    <a  th:href="@{/wishlist}" name="add" th:value="*{id}" class=" fas fa-heart"></a>-->
+                        <!--&lt;!&ndash;                    </form>&ndash;&gt;-->
+                        <a href="#" class="fas fa-eye"></a>
+                    </div>
+                    <div class="card-body bg-light text-center">
+                        <div class="mb-2">
+                            <h6  class="font-weight-semibold mb-2">
+                                <a th:text="*{name}" class="text-default mb-2" >Book "MDKFKWF"</a>
+                            </h6>
+                            <a th:text="*{category.getName()}" href="#" class="text-muted" data-abc="true">Roman</a>
+                        </div>
+                        <h3 th:text="|*{price}лв.|" class="mb-0 font-weight-semibold">$9</h3>
+
+                        <form th:action="@{/addToCart}" th:method="post"  >
+                            <input type="hidden" name="add" th:value="*{id}" />
+
+                            <button  type="submit" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i>Добави в количката</button>
+                        </form>
+                        <form th:action="@{/addToWishList}" th:method="post"  >
+                            <input type="hidden" name="add" th:value="*{id}" />
+
+                            <button  type="submit" class="btn bg-cart"><i class=" fas fa-heart mr-2"></i> Добави в любими</button>
+                        </form>
                     </div>
 
                 </div>
-                <div  class="col-md-7">
 
-                    <h5 class=" titleName"  th:text="*{name}" >Name of product</h5>
-                    <p th:text="*{author}"class="mb-2">Author</p>
-                    <p><span class="mr-1"><strong th:text="|*{price} лв.|">$79.99</strong></span></p>
-                    <p th:text="*{description}" class="pt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
-                        error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam.</p>
-                    <div class="table-responsive">
-                        <table class="table table-sm table-borderless mb-0">
-                            <tbody>
-                            <tr>
-                                <th  class="pl-0 w-25" scope="row"><strong>Категория</strong></th>
-                                <td th:text="*{category.name}">CATEGORY</td>
-                            </tr>
-                            <tr>
-                                <th class="pl-0 w-25" scope="row"><strong>Състояние</strong></th>
-                                <td th:text="*{condition.name}">CONDITION</td>
-                            </tr>
-                            <tr>
-                                <th class="pl-0 w-25" scope="row"><strong>Притежател</strong></th>
-                                <td th:text="*{owner.username}">Притежател</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <hr>
-                    <form th:action="@{/addToCart}" th:method="post">
-                        <input type="hidden" name="add" th:value="*{id}" />
-                        <button  type="submit" class="btn  btn-md mr-1 mb-2 waves-effect waves-light buton">Добави в количката</button>
-                    </form>
-                    <form th:action="@{/addToWishList}" th:method="post"  >
-                        <input type="hidden" name="add" th:value="*{id}" />
-
-                        <button  type="submit" class="btn bg-cart"><i class=" fas fa-heart mr-2"></i> Добави в любими</button>
-                    </form>
+                </th:block>
             </div>
 
-        </section>
-
-    </div>
+            <h5 th:if="${searchResult.size()==0}" style="margin-top: 2rem;color: orange;font-size: 3rem;" >Няма намерени резултати</h5>
 
 </main>
 

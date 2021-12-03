@@ -697,6 +697,14 @@ input[type="password"] {
     /*margin: 20rem;*/
     margin-top: 2rem;
     margin-bottom: 2rem;
+    /*background-image:url("../images/back2.jpg");*/
+}
+.blogs2 {
+    /*padding: 2rem 10%;*/
+    /*margin: 20rem;*/
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background:whitesmoke;
 }
 
 .content{
