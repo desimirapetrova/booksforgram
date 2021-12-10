@@ -26,8 +26,7 @@ public class DatabaseInit implements CommandLineRunner {
         categoryService.initCategories();
         conditionService.initConditions();
         userService.initializeUsersAndRoles();
-        bookService.initBooks();
-
+//        bookService.initBooks();
     }
 }
 

@@ -31,24 +31,24 @@ public class PicturesController {
 //        return "add";
 //    }
 
-    @PostMapping("/pictures/add")
-    public String addPicture(PictureBindingModel bindingModel) throws IOException {
-
-        var picture = createPictureEntity(bindingModel.getPicture(),
-                bindingModel.getTitle());
-
-        pictureRepository.save(picture);
-
-        return "redirect:/";
-    }
-
-    private Picture createPictureEntity(MultipartFile file, String title) throws IOException {
-        final CloudinaryImage uploaded = this.cloudinaryService.upload(file);
-        Picture picture=new Picture();
-        picture.setPublicId(uploaded.getPublicId());
-        picture.setTitle(title);
-        picture.setUrl(uploaded.getUrl());
-       return picture;
-    }
+//    @PostMapping("/pictures/add")
+//    public String addPicture(PictureBindingModel bindingModel) throws IOException {
+//
+//        var picture = createPictureEntity(bindingModel.getPicture(),
+//                bindingModel.getTitle());
+//
+//        pictureRepository.save(picture);
+//
+//        return "redirect:/";
+//    }
+//
+//    private Picture createPictureEntity(MultipartFile file, String title) throws IOException {
+//        final CloudinaryImage uploaded = this.cloudinaryService.upload(file);
+//        Picture picture=new Picture();
+//        picture.setPublicId(uploaded.getPublicId());
+//        picture.setTitle(title);
+//        picture.setUrl(uploaded.getUrl());
+//       return picture;
+//    }
 
 }

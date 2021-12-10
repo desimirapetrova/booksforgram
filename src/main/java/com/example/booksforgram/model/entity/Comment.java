@@ -3,6 +3,7 @@ package com.example.booksforgram.model.entity;
 import org.springframework.security.core.Transient;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "comments")
 public class Comment extends BaseEntity{
     private Boolean approved;
+    @Lob
     private String textContent;
     private LocalDateTime created;
     @ManyToOne

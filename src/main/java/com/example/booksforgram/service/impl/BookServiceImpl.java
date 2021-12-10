@@ -124,7 +124,7 @@ public class BookServiceImpl implements BookService {
         Book book2=new Book();
         book2.setName("Шифърът на Леонардо");
         book2.setAuthor("Дан Браун");
-        book2.setQuantity(2);
+        book2.setQuantity(1);
         book2.setCategory(categoryRepository.getById(Long.valueOf(6)));
         book2.setCondition(conditionRepository.getById(Long.valueOf(1)));
         book2.setDescription("Неразгадаем шифър, скрит в произведенията на Леонардо да Винчи.\n" +

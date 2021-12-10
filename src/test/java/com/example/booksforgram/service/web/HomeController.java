@@ -16,6 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class HomeController {
     @Autowired
     private MockMvc mockMvc;
+
     @Test
     @WithMockUser("desimira")
     void testGetHomeWithLoginUser() throws Exception {
@@ -24,22 +25,7 @@ public class HomeController {
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"));
     }
-    @Test
-    @WithMockUser("desimira")
-    void getBlogs() throws Exception {
-        mockMvc.
-                perform(get("/blogs"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("blogs"));
-    }
-    @Test
-    @WithMockUser("desimira")
-    void getBlog() throws Exception {
-        mockMvc.
-                perform(get("/blog"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("blog"));
-    }
+
     @Test
     void testGetHomeWithAnonymous() throws Exception {
         mockMvc.

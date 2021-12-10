@@ -50,6 +50,8 @@
         <input th:field="*{imageUrl}" th:errorclass="is-invalid" name="imageUrl"
                id="imageUrl" type="url" class="form-control"
                placeholder="Putimage URL here"/>
+        <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
+               class="  rounded"></small>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Добави</button>
     </form>

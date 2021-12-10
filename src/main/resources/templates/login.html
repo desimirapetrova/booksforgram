@@ -30,6 +30,9 @@
  <label class="checkbox">-->
 <!--            <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Запомни ме-->
 <!--        </label>-->
+        <p th:if="${bad_credentials}" class="errors alert alert-danger">
+            Invalid username or password.
+        </p>
         <a class=" btn-register" href="/register" role="button">Нов потребител?</a>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
     </form>

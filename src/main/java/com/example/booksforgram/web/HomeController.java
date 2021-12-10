@@ -47,7 +47,7 @@ public class HomeController {
         List<Email> emails=emailRepository.findByEmail(modelMapper
                 .map(emailBindingModel, EmailServiceModel.class).getEmail());
         if (!emails.isEmpty()) {
-            model.addAttribute("usernameError", "Пользователь существует!");
+            model.addAttribute("usernameError", "Вече съществува");
             return "home";
         }
         return "home" ;

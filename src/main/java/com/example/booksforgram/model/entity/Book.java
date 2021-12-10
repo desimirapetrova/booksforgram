@@ -10,7 +10,8 @@ public class Book extends BaseEntity{
 
     @Column()
     private String name;
-    @Column(nullable = false,columnDefinition = "LONGTEXT")
+//    @Column(nullable = false,columnDefinition = "LONGTEXT")
+    @Lob
     private String description;
     @Column()
     private Integer price;
@@ -23,13 +24,14 @@ public class Book extends BaseEntity{
     private String author;
     @ManyToOne
     private User owner;
-    @Column( columnDefinition = "TEXT")
+//    @Column( columnDefinition = "TEXT")
+    @Lob
     private String imageUrl;
 
 //    @OneToOne
 //    private Picture pictures;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     public Book() {

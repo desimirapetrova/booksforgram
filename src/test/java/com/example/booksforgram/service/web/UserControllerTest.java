@@ -7,12 +7,15 @@ import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 
+import com.example.booksforgram.model.entity.Role;
 import com.example.booksforgram.model.entity.User;
 import com.example.booksforgram.model.entity.enums.GenderEnum;
+import com.example.booksforgram.model.entity.enums.UserRoleEnum;
 import com.example.booksforgram.repository.UserRepository;
 import com.example.booksforgram.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
@@ -29,100 +32,67 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-class UserControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    @SpringBootTest
+    @AutoConfigureMockMvc
+    class UserControllerTest {
 
-    @Autowired
-    private UserRepository userRepository;
-    private User user;
-    @InjectMocks
-    UserServiceImpl userService;
-    private User USER_ENTITY_MODEL;
+        @Autowired
+        private MockMvc mockMvc;
 
-//    @AfterEach
-//    void tearDown()  throws  Exception{
-//    userRepository.deleteAll();
-//    }
+        @Autowired
+        private UserRepository userRepository;
 
-    @Test
-    void testOpenRegisterForm() throws Exception {
-        mockMvc.
-                perform(get("/register"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("register"));
-    } @Test
-    void testLoginForm() throws Exception {
-        mockMvc.
-                perform(get("/login"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("login"));
-    }
-    @Test
-    @WithMockUser("desimira")
-    void testOpenLogout() throws Exception {
-        mockMvc.
-                perform(get("/logout"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("/"));
-    }
- @Test
- @WithMockUser("desimira")
- void testGetProfile() throws Exception {
-        mockMvc.
-                perform(get("/profile"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("profile"));
+        @AfterEach
+        void tearDown() {
+            userRepository.deleteAll();
+        }
 
-    }@Test
-    @WithMockUser("desimira")
+        @Test
+        void testOpenRegisterForm() throws Exception {
+            mockMvc.
+                    perform(get("/register"))
+                    .andExpect(status().isOk())
+                    .andExpect(view().name("register"));
+        }
 
-    void testGetMyProfile() throws Exception {
-        mockMvc.
-                perform(get("/profileUser/1"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("profileUser"));
-    }
+        private static final String TEST_USER_EMAIL = "pesho@example.com";
+        private static final String TEST_USERNAME = "petartest";
+        private static final int TEST_USER_AGE = 22;
 
-    private static final String TEST_USER_EMAIL = "desi@abv.bg";
-    private static final String TEST_USERNAME = "desimira";
-    private static final int TEST_USER_AGE = 22;
+        @Test
+        void testRegisterUser() throws Exception {
 
-    @Test
-    void testRegisterUser() throws Exception {
-        mockMvc.perform(post("/register").
-                param("username",TEST_USERNAME).
-                param("first_name","Desimira").
-                param("last_name","Petrova").
-                param("email",TEST_USER_EMAIL).
-                param("age",String.valueOf(TEST_USER_AGE)).
-                param("password","11111").
-                param("confirmPassword","11111").
-                with(csrf()).
-                contentType(MediaType.APPLICATION_FORM_URLENCODED)
-        ).
-                andExpect(status().is3xxRedirection());
+            mockMvc.perform(post("/register").
+                    param("username",TEST_USERNAME).
+                    param("first_name","Pesho").
+                    param("last_name","Petrov").
+                    param("email",TEST_USER_EMAIL).
+                    param("age",String.valueOf(TEST_USER_AGE)).
+                    param("password","12345").
+                    param("confirmPassword","12345").
+                    param("gender",GenderEnum.FEMALE.name()).
+                    with(csrf()).
+                    contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            ).
+                    andExpect(status().is3xxRedirection());
 
-//        Assertions.assertEquals(1, userRepository.count());
+            Assertions.assertEquals(1, userRepository.count());
+//
+            Optional<User> newlyCreatedUserOpt = userRepository.findByUsername(TEST_USERNAME);
+//
+            Assertions.assertTrue(newlyCreatedUserOpt.isPresent());
 
-        Optional<User> newlyCreatedUserOpt = userRepository.findByUsername(TEST_USERNAME);
+            User newlyCreatedUser = newlyCreatedUserOpt.get();
 
-        Assertions.assertTrue(newlyCreatedUserOpt.isPresent());
+            Assertions.assertEquals(TEST_USER_AGE, newlyCreatedUser.getAge());
+            Assertions.assertEquals(TEST_USER_EMAIL,newlyCreatedUser.getEmail());
+            Assertions.assertEquals(TEST_USERNAME,newlyCreatedUser.getUsername());
+            Assertions.assertEquals(GenderEnum.FEMALE.name(),newlyCreatedUser.getGender().name());
+            Assertions.assertEquals("Pesho",newlyCreatedUser.getFirst_name());
+            Assertions.assertEquals("Petrov",newlyCreatedUser.getLast_name());
 
-        User newlyCreatedUser = newlyCreatedUserOpt.get();
 
-        assertEquals(TEST_USER_AGE, newlyCreatedUser.getAge());
-        assertEquals(TEST_USERNAME, newlyCreatedUser.getUsername());
-        assertEquals(TEST_USER_EMAIL, newlyCreatedUser.getEmail());
-        assertEquals("Desimira", newlyCreatedUser.getFirst_name());
-        assertEquals("Petrova", newlyCreatedUser.getLast_name());
+        }
 
     }
-
-
-
-
-}

@@ -54,42 +54,84 @@
                         </div>
                     </div>
                     <hr>
+
                     <th:block th:if="${books.size()>=1}">
-                    <h1 class="heading2"> <span>Kниги</span> </h1>
+                        <h1 class="heading"  style=" text-align: -webkit-center;"> <span th:text="|Книгите на ${user.username}|"> Книги</span> </h1>
+
                         <hr>
 <!--                            <p th:text="${b.name}"></p>-->
 
+                        <div class="container d-flex justify-content-center mt-50 mb-50">
+                        <div class="row">
+                            <div th:each="b : ${books}" th:object="${b}" th:if="${b.quantity>0}" class="col-md-4 mt-2">
+                                <div    class="card">
+                                    <div class="card-body">
+                                        <div class="card-img-actions center"> <img th:src="*{getImageUrl()}"class="img-fluid2 img-fluid" alt=""> </div>
+                                    </div>
+                                    <div class="iconss">
+                                        <a th:href="@{/details/{id}(id = *{id})}" class="fas fa-info-circle" > детайли </a>
 
-                            <div class=" d-flex justify-content-center mt-10 mb-10">
-                                <div   th:each="b:${books}" th:object="${b}" class="row">
-                                    <div  class="col-md-4 mt-1">
-                                        <div   class="card" style="min-width: 25rem;" >
-                                            <div class="card-body" style="height: 20rem; min-width: 20rem;">
-                                                <div class="img-fluid"> <img th:src="*{imageUrl}"class="rounded mx-auto d-block" style="height: 20rem;" alt=""> </div>
-                                            </div>
-                                            <div class="card-body bg-light text-center">
-                                                <div class="mb-2">
-                                                    <h6  class="font-weight-semibold mb-2">
-                                                        <a th:text="*{name}" class="text-default mb-2" >Book "MDKFKWF"</a>
-                                                    </h6>
-                                                    <a th:text="*{category.name}" href="#" class="text-muted" data-abc="true">Roman</a>
-                                                </div>
-                                                <h3 th:text="|*{price}лв.|" class="mb-0 font-weight-semibold">$9</h3>
-
-                                                <a th:href="@{/details/{id}(id = *{id})}" class="info">Информация</a>
-
-                                            </div>
-
+                                    </div>
+                                    <div class="card-body bg-light text-center">
+                                        <div class="mb-2">
+                                            <h6  class="font-weight-semibold mb-2">
+                                                <a th:text="*{name}" class="text-default mb-2" >Book "MDKFKWF"</a>
+                                            </h6>
+                                            <a th:text="*{category.name}" th:href="@{/categories(id =${b.category.getId()})}" class="text-muted" data-abc="true">Roman</a>
                                         </div>
+                                        <h3 th:text="|*{price}лв.|" class="mb-0 font-weight-semibold">$9</h3>
+
+<!--                                        <th:block th:if="${user!=null}">-->
+<!--                                            <th:block th:if="${b.owner.username==user.username}"   >-->
+
+<!--                                                <a th:href="@{/books/{id}/edit(id=*{id})}" type="submit" class="btn bg-cart"><i class="fa  mr-2"></i> Редактирай</a>-->
+<!--                                                <form th:action="@{/books/{id}(id=*{id})}" th:method="delete">-->
+<!--                                                    <input type="submit" class="btn  bg-danger" value="Изтрий"/>-->
+<!--                                                </form>-->
+<!--                                            </th:block>-->
+<!--                                            &lt;!&ndash;                    <th:block  sec:authorize="hasRole('ADMIN')" >&ndash;&gt;-->
+<!--                                            &lt;!&ndash;                        <a th:href="@{/books/{id}/edit(id=*{id})}" type="submit" class="btn bg-cart"><i class="fa  mr-2"></i> Редактирай</a>&ndash;&gt;-->
+<!--                                            &lt;!&ndash;                        <form th:action="@{/books/{id}(id=*{id})}" th:method="delete">&ndash;&gt;-->
+<!--                                            &lt;!&ndash;                            <input type="submit" class="btn  bg-danger" value="Изтрий"/>&ndash;&gt;-->
+<!--                                            &lt;!&ndash;                        </form>&ndash;&gt;-->
+<!--                                            &lt;!&ndash;                    </th:block>&ndash;&gt;-->
+
+<!--                                            <th:block th:unless="${b.owner.username==user.username}" >-->
+<!--                                                <th:block sec:authorize="hasRole('USER')">-->
+<!--                                                    <form th:action="@{/addToCart}" th:method="post"  >-->
+<!--                                                        <input type="hidden" name="add" th:value="*{id}" />-->
+
+<!--                                                        <button  type="submit" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i>Добави в количката</button>-->
+<!--                                                    </form>-->
+<!--                                                    <form th:action="@{/addToWishList}" th:method="post"  >-->
+<!--                                                        <input type="hidden" name="add" th:value="*{id}" />-->
+<!--                                                        <button  type="submit" class="btn bg-cart"><i class=" fas fa-heart mr-2"></i> Добави в любими</button>-->
+
+<!--                                                    </form>-->
+<!--                                                </th:block>-->
+<!--                                                <th:block sec:authorize="hasRole('ADMIN')">-->
+<!--                                                    <a th:href="@{/books/{id}/edit(id=*{id})}" type="submit" class="btn bg-cart"><i class="fa  mr-2"></i> Редактирай</a>-->
+<!--                                                    <form th:action="@{/books/{id}(id=*{id})}" th:method="delete">-->
+<!--                                                        <input type="submit" class="btn  bg-danger" value="Изтрий"/>-->
+<!--                                                    </form>-->
+
+<!--                                                </th:block>-->
+<!--                                                </form>-->
+<!--                                            </th:block>-->
+<!--                                        </th:block>-->
 
                                     </div>
 
                                 </div>
 
                             </div>
+                        </div>
+
+                    </div>
+
+
                     </th:block>
 
-        </div>
             </div>
         </div>
     </div>
