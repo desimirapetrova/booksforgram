@@ -1,6 +1,7 @@
 package com.example.booksforgram.model.binding;
 
 import com.example.booksforgram.model.entity.enums.GenderEnum;
+import com.example.booksforgram.model.validator.UniqueEmail;
 import com.example.booksforgram.model.validator.UniqueUserName;
 import org.hibernate.validator.constraints.UniqueElements;
 
@@ -17,6 +18,7 @@ public class RegisterBindingModel {
     @NotEmpty(message = "Моля,попълнете това поле." )
     @Size(min = 3,max = 20,message = "Фамилията трябва да съдържа повече от 2 символа.")
     private String last_name;
+    @UniqueEmail
     @Email(message = "Емейл адресът трябва да бъде валиден.")
     private String email;
     @Min(value = 12,message = "Минималната възраст е 12 години.")

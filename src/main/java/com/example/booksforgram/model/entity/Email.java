@@ -8,6 +8,7 @@ import javax.persistence.Table;
 @Table(name = "emails")
 public class Email extends BaseEntity{
 
+    @Column(unique = true)
     private String email;
     private String username;
 

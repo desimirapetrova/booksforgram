@@ -22,9 +22,11 @@ public interface UserService {
 
     void registerAndLoginUser(UserServiceModel userServiceModel);
 
-    void activate(Principal principal);
-
-    void deactivate(Principal principal);
+//    void activate(Principal principal);
+//
+//    void deactivate(Principal principal);
 
     boolean isUserNameFree(String userName);
+
+    boolean isEmailFree(String email);
 }

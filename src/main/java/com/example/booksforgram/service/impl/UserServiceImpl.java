@@ -111,23 +111,29 @@ public class UserServiceImpl implements UserService {
                 setAuthentication(authentication);
     }
 
-    @Override
-    public void activate(Principal principal) {
-       User user= userRepository.findByUsername(principal.getName()).orElse(null);
-        user.setActive(true);
-        userRepository.save(user);
-    }
-
-    @Override
-    public void deactivate(Principal principal) {
-        User user= userRepository.findByUsername(principal.getName()).orElse(null);
-        user.setActive(false);
-        userRepository.save(user);
-    }
+//    @Override
+//    public void activate(Principal principal) {
+//       User user= userRepository.findByUsername(principal.getName()).orElse(null);
+//        user.setActive(true);
+//        userRepository.save(user);
+//    }
+//
+//    @Override
+//    public void deactivate(Principal principal) {
+//        User user= userRepository.findByUsername(principal.getName()).orElse(null);
+//        user.setActive(false);
+//        userRepository.save(user);
+//    }
 
     @Override
     public boolean isUserNameFree(String username) {
             return userRepository.findByUsernameIgnoreCase(username).isEmpty();
+    }
+
+    @Override
+    public boolean isEmailFree(String email) {
+
+        return userRepository.findByEmailIgnoreCase(email).isEmpty();
     }
 
 
