@@ -202,7 +202,7 @@ public class BookController {
 //        category=CategoryEnum.Роман.name();
 //        condition.setId(1L);
         category.setName(CategoryEnum.Роман);
-        condition.setName(ConditionEnum.ИЗПОЛЗВАНО);
+        condition.setName(ConditionEnum.използвано);
         mockMvc.perform(post("/add-book").
                 param("name",TEST_NAME).
                 param("author",TEST_AUTHOR).

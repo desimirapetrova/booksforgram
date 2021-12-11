@@ -1133,3 +1133,7 @@ textarea{
 .main2{
     padding-top: 2rem;
 }
+.rounded2 {
+    border-radius: 0.25rem!important;
+    font-size: 2rem;
+}

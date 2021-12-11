@@ -150,7 +150,7 @@ public class UserServiceImpl implements UserService {
             admin .setLast_name("Adminov");
             admin.setEmail("admin@abv.bg");
             admin.setAge(20);
-            admin.setGender(GenderEnum.FEMALE);
+            admin.setGender(GenderEnum.female);
             admin.setRoles(Set.of(adminRole));
             userRepository.save(admin);
 
@@ -161,7 +161,7 @@ public class UserServiceImpl implements UserService {
             desimira .setLast_name("Petrova");
             desimira.setEmail("desi@abv.bg");
             desimira.setAge(22);
-            desimira.setGender(GenderEnum.FEMALE);
+            desimira.setGender(GenderEnum.female);
             desimira.setRoles(Set.of(userRole));
             userRepository.save(desimira);
         }

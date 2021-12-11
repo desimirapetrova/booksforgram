@@ -71,7 +71,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                     param("age",String.valueOf(TEST_USER_AGE)).
                     param("password","12345").
                     param("confirmPassword","12345").
-                    param("gender",GenderEnum.FEMALE.name()).
+                    param("gender",GenderEnum.female.name()).
                     with(csrf()).
                     contentType(MediaType.APPLICATION_FORM_URLENCODED)
             ).
@@ -88,7 +88,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
             Assertions.assertEquals(TEST_USER_AGE, newlyCreatedUser.getAge());
             Assertions.assertEquals(TEST_USER_EMAIL,newlyCreatedUser.getEmail());
             Assertions.assertEquals(TEST_USERNAME,newlyCreatedUser.getUsername());
-            Assertions.assertEquals(GenderEnum.FEMALE.name(),newlyCreatedUser.getGender().name());
+            Assertions.assertEquals(GenderEnum.female.name(),newlyCreatedUser.getGender().name());
             Assertions.assertEquals("Pesho",newlyCreatedUser.getFirst_name());
             Assertions.assertEquals("Petrov",newlyCreatedUser.getLast_name());
 

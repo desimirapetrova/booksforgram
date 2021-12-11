@@ -49,7 +49,7 @@
 <!--        <input  th:field="*{picture}" type="file"   class="form-control-file">-->
         <input th:field="*{imageUrl}" th:errorclass="bg-danger" name="imageUrl"
                id="imageUrl" type="url" class="form-control"
-               placeholder="Putimage URL here"/>
+               placeholder="Постави адрес на снимка"/>
         <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
                class="  rounded"></small>
 
