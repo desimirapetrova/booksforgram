@@ -64,7 +64,7 @@ public class BlogsController {
                     .addFlashAttribute("addBlogBindingModel", addBlogBindingModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.addBlogBindingModel", bindingResult);
 
-            return "redirect:/books/add";
+            return "redirect:/add";
         }
 
         AddBlogServiceModel addBlogServiceModel = modelMapper

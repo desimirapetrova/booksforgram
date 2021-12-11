@@ -46,7 +46,7 @@ public class BookController {
         return "add-book";
     }
     @PostMapping("/add-book")
-    public String addConfirm(@Valid AddBookBindingModel addBookBindingModel,@Valid PictureBindingModel bindingModel,
+    public String addConfirm(@Valid AddBookBindingModel addBookBindingModel,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes, Principal user) throws IOException {
 

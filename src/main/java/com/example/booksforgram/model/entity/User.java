@@ -13,15 +13,15 @@ public class User extends BaseEntity implements UserDetails  {
 
     @Column(unique = true)
     private String username;
-    @Column()
+    @Column(nullable = false)
     private String first_name;
-    @Column()
+    @Column(nullable = false)
     private String last_name;
     @Column(unique = true)
     private String email;
-    @Column()
+    @Column(nullable = false)
     private int age;
-    @Column()
+    @Column(nullable = false)
     private String password;
     private boolean isActive;
 

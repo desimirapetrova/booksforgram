@@ -1,18 +1,20 @@
 package com.example.booksforgram.model.binding;
 
 import com.example.booksforgram.model.entity.enums.GenderEnum;
+import com.example.booksforgram.model.validator.UniqueUserName;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.validation.constraints.*;
 
 public class RegisterBindingModel {
-    @NotEmpty
+    @NotEmpty(message = "Моля,попълнете това поле.")
+    @UniqueUserName
     @Size(min = 6,max = 20,message = "Потребителското име трябва да съдържа повече от 5 символа.")
     private String username;
-    @NotEmpty
+    @NotEmpty(message = "Моля,попълнете това поле.")
     @Size(min = 3,max = 20,message = "Името трябва да съдържа повече от 2 символа.")
     private String first_name;
-    @NotEmpty
+    @NotEmpty(message = "Моля,попълнете това поле." )
     @Size(min = 3,max = 20,message = "Фамилията трябва да съдържа повече от 2 символа.")
     private String last_name;
     @Email(message = "Емейл адресът трябва да бъде валиден.")

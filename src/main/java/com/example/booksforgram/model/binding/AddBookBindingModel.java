@@ -9,6 +9,7 @@ import javax.validation.constraints.*;
 
 public class AddBookBindingModel {
     @Size(min = 1,message = "Въведете име на книгата")
+    @NotEmpty(message = "Моля,добавете име")
     private String name;
     @NotEmpty(message = "Моля,добавете описание")
     @Size(min = 10,message = "Минимален брой символи 10")
@@ -23,6 +24,7 @@ public class AddBookBindingModel {
     @Size(min = 3,message = "Името трябва да съдържа поне 3 символа.")
     @NotEmpty(message = "Въведете име автора")
     private String author;
+    @NotEmpty(message = "Моля,добавете снимка")
     private String imageUrl;
     public AddBookBindingModel() {
     }

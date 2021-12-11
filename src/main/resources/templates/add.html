@@ -12,9 +12,13 @@
           enctype="multipart/form-data"
           class="form-add-item">
       <h2 class="form-add-item-heading">Добави блог</h2>
-      <input th:field="*{title}" type="text" class="form-control" name="title" placeholder="Заглавие"
+      <input th:field="*{title}" th:errorclass="bg-danger" type="text" class="form-control" name="title" placeholder="Заглавие"
              id="name"/>
-      <textarea  th:field="*{description}" th:errorclass="bg-danger" type="text" class="textArea form-control" name="description" placeholder="Описание" />
+      <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+             class="  rounded"></small>
+      <textarea  th:field="*{description}"  th:errorclass="bg-danger" type="text" class="textArea form-control" name="description" placeholder="Описание" />
+      <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+             class="  rounded"></small>
       <div class="form-group">
         <label for="image" class="col-form-label  font-weight-bold">Изберете снимка</label>
         <input th:field="*{picture}"

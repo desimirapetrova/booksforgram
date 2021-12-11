@@ -47,7 +47,7 @@
 
 <!--        <label class="pics" >Избери снимка</label>-->
 <!--        <input  th:field="*{picture}" type="file"   class="form-control-file">-->
-        <input th:field="*{imageUrl}" th:errorclass="is-invalid" name="imageUrl"
+        <input th:field="*{imageUrl}" th:errorclass="bg-danger" name="imageUrl"
                id="imageUrl" type="url" class="form-control"
                placeholder="Putimage URL here"/>
         <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"

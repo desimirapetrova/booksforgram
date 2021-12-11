@@ -1,5 +1,6 @@
 package com.example.booksforgram.model.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -7,7 +8,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "blogs")
 public class Blog extends BaseEntity{
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String  description;
     @ManyToOne
     private Picture picture;

@@ -4,9 +4,14 @@ import com.example.booksforgram.model.entity.Picture;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class AddBlogBindingModel {
+    @NotEmpty(message = "Моля,въведете заглавие")
     private String title;
+    @NotEmpty(message = "Моля,въведете описане")
     private String  description;
 
     private MultipartFile picture;

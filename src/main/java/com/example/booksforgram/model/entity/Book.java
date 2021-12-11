@@ -8,24 +8,25 @@ import java.util.List;
 @Table(name = "books")
 public class Book extends BaseEntity{
 
-    @Column()
+    @Column(nullable = false)
     private String name;
-//    @Column(nullable = false,columnDefinition = "LONGTEXT")
+    @Column(nullable = false)
     @Lob
     private String description;
-    @Column()
+    @Column(nullable = false)
     private Integer price;
     private Integer quantity=1;
     @ManyToOne()
     private Condition condition;
     @ManyToOne
     private Category category;
-
+    @Column(nullable = false)
     private String author;
     @ManyToOne
     private User owner;
 //    @Column( columnDefinition = "TEXT")
     @Lob
+    @Column(nullable = false)
     private String imageUrl;
 
 //    @OneToOne

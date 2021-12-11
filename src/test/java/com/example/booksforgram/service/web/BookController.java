@@ -114,13 +114,13 @@ public class BookController {
                 .andExpect(view().name("/mybooks"));
     }
 
-        @Test
-    void testGetShoppingCart() throws Exception {
-        mockMvc.
-                perform(get("/shoppingCart"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("/shoppingCart"));
-    }
+//        @Test
+//    void testGetShoppingCart() throws Exception {
+//        mockMvc.
+//                perform(get("/shoppingCart"))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("/shoppingCart"));
+//    }
 //    @Test
 //    void testGetWishlist() throws Exception {
 //        mockMvc.
@@ -214,7 +214,7 @@ public class BookController {
                 with(csrf()).
                 contentType(MediaType.APPLICATION_FORM_URLENCODED)
         ).
-                andExpect(status().is4xxClientError());
+                andExpect(status().is3xxRedirection());
 
         Assertions.assertEquals(0, bookRepository.count());
 

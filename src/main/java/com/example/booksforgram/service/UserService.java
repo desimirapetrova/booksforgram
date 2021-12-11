@@ -26,4 +26,5 @@ public interface UserService {
 
     void deactivate(Principal principal);
 
+    boolean isUserNameFree(String userName);
 }
