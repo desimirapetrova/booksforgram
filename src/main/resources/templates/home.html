@@ -219,9 +219,10 @@
         <h3>Запиши се за нашия онлайн бюлетин и научи първи за промоционални и нови книги.</h3>
         <input th:field="*{email}" th:errorclass="bg-danger" type="email" name="" placeholder="Въведи своя имейл" id="" class="box">
         <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-               class=" text-light rounded"></small>
+               class=" rounded"></small>
+        <hr>
         <input  type="submit" value="Абонирай се" class="btn">
-        <div th:if="${usernameError}" class="invalid-feedback" th:text="${usernameError}"></div>
+<!--        <div th:if="${usernameError}" class="invalid-feedback" th:text="${usernameError}"></div>-->
 
 <!--        <p th:each="email:${allEmails}" th:text="*{email}"/>-->
     </form>

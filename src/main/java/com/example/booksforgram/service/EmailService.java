@@ -10,4 +10,6 @@ public interface EmailService {
     void saveEmails(EmailServiceModel emailServiceModel,String username);
 
     List<Email> findAll();
+
+    boolean isEmailFree(String email);
 }

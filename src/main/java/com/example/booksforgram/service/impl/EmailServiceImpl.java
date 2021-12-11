@@ -44,4 +44,10 @@ public class EmailServiceImpl implements EmailService {
                 .map(email -> modelMapper.map(email, Email.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public boolean isEmailFree(String email) {
+
+        return emailRepository.findByEmailIgnoreCase(email).isEmpty();
+    }
 }

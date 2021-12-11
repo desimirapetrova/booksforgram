@@ -25,19 +25,15 @@
           <div class="card-img-actions center"> <img th:src="*{imageUrl}"class="img-fluid2 img-fluid"  alt=""> </div>
         </div>
         <div class="iconss">
-          <a th:href="@{/details/{id}(id = *{id})}" class="fas fa-info"></a>
-          <!--                    <form th:action="@{/addToWishList}" th:method="post"  >-->
-          <!--                        <input type="hidden" name="add" th:value="*{id}" />-->
-          <!--                    <a  th:href="@{/wishlist}" name="add" th:value="*{id}" class=" fas fa-heart"></a>-->
-          <!--&lt;!&ndash;                    </form>&ndash;&gt;-->
-          <a href="#" class="fas fa-eye"></a>
+          <a th:href="@{/details/{id}(id = *{id})}" class="fas fa-info-circle" > детайли </a>
+
         </div>
         <div class="card-body bg-light text-center">
           <div class="mb-2">
             <h6  class="font-weight-semibold mb-2">
               <a th:text="*{name}" class="text-default mb-2" >Book "MDKFKWF"</a>
             </h6>
-            <a th:text="*{category.getName()}" href="#" class="text-muted" data-abc="true">Roman</a>
+            <a th:text="*{category.getName()}" th:href="@{/categories(id =${b.category.getId()})}" class="text-muted" data-abc="true">Roman</a>
           </div>
           <h3 th:text="|*{price}лв.|" class="mb-0 font-weight-semibold">$9</h3>
 

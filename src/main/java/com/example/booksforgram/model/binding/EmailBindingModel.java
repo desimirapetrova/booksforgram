@@ -1,5 +1,7 @@
 package com.example.booksforgram.model.binding;
 
+import com.example.booksforgram.model.validator.UniqueEmail;
+import com.example.booksforgram.model.validator.UniqueEmailNewsletter;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.UniqueConstraint;
@@ -7,7 +9,7 @@ import javax.validation.constraints.Email;
 
 public class EmailBindingModel {
     @Email(message = "въведения имейл адрес е навалиден")
-//    @UniqueElements(message = "вече съществува")
+    @UniqueEmailNewsletter
     private String email;
     private String username;
 

@@ -14,7 +14,7 @@ values
 
 
 ',
-        1,2,1 ),
+        6,2,1 ),
        ('Шифърът на Леонардо','Дан Браун',
         'https://cdn.ozone.bg/media/catalog/product/cache/1/image/400x498/a4e40ebdc3e371adff845072e1c73f37/s/h/54902b5f4a294c8333900117e0090ef4/shifarat-na-leonardo-robart-langdan-2-30.jpg',
         1,10,

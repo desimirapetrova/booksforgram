@@ -6,8 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EmailRepository extends JpaRepository<Email,Long> {
     List<Email> findByEmail(String email);
+
+    Optional<Email> findByEmailIgnoreCase(String email);
 }
