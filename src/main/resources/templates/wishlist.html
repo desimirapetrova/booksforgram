@@ -13,7 +13,7 @@
         <div th:each="b : ${wishItems}" th:object="${b}" class="col-md-4 mt-2">
             <div   class="card">
                 <div class="card-body">
-                    <div class="card-img-actions center"> <img th:src="*{imageUrl}" class="img-fluid" alt=""> </div>
+                    <div class="card-img-actions center"> <img th:src="*{imageUrl}" class="img-fluid2 img-fluid"  alt=""> </div>
                 </div>
                 <div class="iconss">
                     <a th:href="@{/details/{id}(id = *{id})}" class="fas fa-info"></a>

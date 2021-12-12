@@ -158,12 +158,23 @@ public class UserServiceImpl implements UserService {
             desimira.setUsername("desimira");
             desimira.setPassword(passwordEncoder.encode("11111"));
             desimira.setFirst_name("Desimira");
-            desimira .setLast_name("Petrova");
+            desimira.setLast_name("Petrova");
             desimira.setEmail("desi@abv.bg");
             desimira.setAge(22);
             desimira.setGender(GenderEnum.female);
             desimira.setRoles(Set.of(userRole));
             userRepository.save(desimira);
+
+            User pesho = new User();
+            pesho.setUsername("pesho12");
+            pesho.setPassword(passwordEncoder.encode("22222"));
+            pesho.setFirst_name("Petar");
+            pesho.setLast_name("Petrov");
+            pesho.setEmail("pesho@abv.bg");
+            pesho.setAge(28);
+            pesho.setGender(GenderEnum.male);
+            pesho.setRoles(Set.of(userRole));
+            userRepository.save(pesho);
         }
     }
 

@@ -38,7 +38,7 @@ public class WishController {
         user.getWishBookList().add(book);
         userService.save(user);
 
-        return "redirect:wishlist";
+        return "redirect:featured";
     }
     @GetMapping("/removeFromWish")
     public String getremove(){

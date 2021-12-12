@@ -127,7 +127,7 @@ async function postFormDataAsJson({url, formData}) {
 }
 
 function asComment(c) {
-    let commentHtml = `<div id="commentCntr-${c.commentId}">`
+    let commentHtml = `<div id="commentCtnr-${c.commentId}">`
 
     commentHtml += `<h4>${c.user} (${c.created})</h4><br/>`
     commentHtml += `<p>${c.message}</p>`

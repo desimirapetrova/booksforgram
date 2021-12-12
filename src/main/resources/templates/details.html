@@ -49,7 +49,7 @@
               </tr>
               <tr>
                 <th class="pl-0 w-25" scope="row"><strong>Притежател</strong></th>
-               <td th:text="${book.owner.username}">Притежател</td>
+               <td th:text="${book.owner.username}" >Притежател</td>
               </tr>
               </tbody>
             </table>
@@ -118,6 +118,10 @@
       <div>
 
         <span id="commentCtnr">
+          <div th:each="c:${comments}" th:if="${c.book.id==book.id}">
+             <h4 th:text="|${c.author.username} (${c.created})|"></h4><br/>
+    <p th:text="${c.textContent}"></p><hr>
+          </div>
           <hr><!-- Comments section, filled in by script --></span>
       </div>
       <!-- EO: All comments section -->

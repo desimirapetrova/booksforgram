@@ -79,6 +79,14 @@ public class CommentServiceImpl implements CommentService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Comment> findAllOrderByTime() {
+
+        return commentRepository.findAllOrderedByCreated().stream()
+                .map(comment -> modelMapper.map(comment, Comment.class))
+                .collect(Collectors.toList());
+    }
+
     private CommentViewModel mapAsComment(Comment commentEntity) {
         CommentViewModel commentViewModel = new CommentViewModel();
 

@@ -67,7 +67,7 @@ public class OrderController {
         userFromDB.getBookList().clear();
         userService.save(userFromDB);
 //        return "redirect:/details/" + bookServiceModel.getId();
-        return "redirect:/";
+        return "redirect:/profile";
     }
     @ModelAttribute
     public OrderBindingModel orderBindingModel(){

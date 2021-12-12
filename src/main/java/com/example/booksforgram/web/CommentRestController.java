@@ -40,6 +40,7 @@ public class CommentRestController {
             @PathVariable Long bookId,
             Principal principal, Model model
             ) {
+        model.addAttribute("comments",commentService.findAllOrderByTime());
         return ResponseEntity.ok(
                 commentService.getComments(bookId));
 

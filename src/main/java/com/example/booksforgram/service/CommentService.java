@@ -12,4 +12,6 @@ public interface CommentService {
     CommentViewModel createComment(CommentServiceModel serviceModel);
 
     List<Comment> findAll();
+
+    List<Comment> findAllOrderByTime();
 }
