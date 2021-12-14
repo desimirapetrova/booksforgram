@@ -2,6 +2,7 @@ package com.example.booksforgram.model.binding;
 
 import com.example.booksforgram.model.entity.Category;
 import com.example.booksforgram.model.entity.Condition;
+import com.example.booksforgram.model.entity.User;
 import com.example.booksforgram.model.entity.enums.CategoryEnum;
 import com.example.booksforgram.model.entity.enums.ConditionEnum;
 import com.example.booksforgram.model.service.BookUpdateServiceModel;
@@ -29,12 +30,20 @@ public class BookUpdateBindingModel {
     @Size(min = 3,message = "Името трябва да съдържа поне 3 символа.")
     @NotEmpty(message = "Въведете име автора")
     private String author;
-
+    @NotEmpty(message = "Моля,добавете снимка")
     private String imageUrl;
-
+    private User owner;
 
 
     public BookUpdateBindingModel() {
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public String getAuthor() {

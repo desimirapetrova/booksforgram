@@ -7,6 +7,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class StatsServiceImpl implements StatsService {
 
@@ -31,4 +33,6 @@ public class StatsServiceImpl implements StatsService {
     public StatsView getStats() {
         return new StatsView(authRequests, anonymousRequests);
     }
+
+
 }

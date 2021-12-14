@@ -228,6 +228,27 @@
     </form>
 
 </section>
+<section class="deal">
+
+
+
+    <div class="image">
+        <img src="images/sale.png" alt="">
+    </div>
+    <div class="content" style="    text-align: center;">
+        <h5 style="font-size: 4rem">Възползвайте се от нашите промоции всеки ден от 18ч.</h5>
+        <!-- Display the countdown timer in an element -->
+        <div id="the-final-countdown">
+            <p style="font-size: 3rem"></p>
+        </div>
+
+        <a href="/promo" class="btn">Промоции</a>
+    </div>
+
+    <script th:src="@{/js/countdown.js}"></script>
+
+
+</section>
 
 <footer th:replace="fragments/commons::footer"></footer>
 </body>

@@ -1137,3 +1137,12 @@ textarea{
     border-radius: 0.25rem!important;
     font-size: 2rem;
 }
+#the-final-countdown {
+
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    text-shadow: 1px 1px 5px #de9862;
+    color: orange;
+    padding: 1rem 0;
+    font-size: 5rem;
+}
