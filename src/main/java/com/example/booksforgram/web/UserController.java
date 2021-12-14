@@ -1,15 +1,20 @@
 package com.example.booksforgram.web;
 
+import com.example.booksforgram.model.binding.BookUpdateBindingModel;
+import com.example.booksforgram.model.binding.EditUserBindingModel;
 import com.example.booksforgram.model.binding.LoginBindingModel;
 import com.example.booksforgram.model.binding.RegisterBindingModel;
 import com.example.booksforgram.model.entity.Book;
 import com.example.booksforgram.model.entity.Order;
 import com.example.booksforgram.model.entity.User;
+import com.example.booksforgram.model.service.BookUpdateServiceModel;
+import com.example.booksforgram.model.service.UserEditServiceModel;
 import com.example.booksforgram.model.service.UserServiceModel;
 import com.example.booksforgram.service.BookService;
 import com.example.booksforgram.service.EmailService;
 import com.example.booksforgram.service.OrderService;
 import com.example.booksforgram.service.UserService;
+import javassist.tools.rmi.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
@@ -144,6 +149,41 @@ public class UserController {
         model.addAttribute("books",bookService.findBookById(id));
 
         return "profileUser";
+    }
+    @GetMapping("/profile/{id}/edit")
+    public String editOffer(@PathVariable Long id, Model model,
+                            Principal principal) {
+        model.addAttribute("user", userService.findById(id));
+        return "updateProfile";
+    }
+    @PatchMapping("/profile/{id}/edit")
+    public String editUser(
+            @PathVariable Long id,
+            @Valid EditUserBindingModel editUserBindingModel,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes) throws ObjectNotFoundException {
+
+        if (bindingResult.hasErrors()) {
+
+            redirectAttributes.addFlashAttribute("editUserBindingModel", editUserBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.editUserBindingModel", bindingResult);
+
+            return "redirect:/profile/" + id + "/edit";
+        }
+
+//        BookUpdateServiceModel serviceModel = modelMapper.map(bookModel,
+//                BookUpdateServiceModel.class);
+//        serviceModel.setId(id);
+//
+//        bookService.updateBook(serviceModel);
+//
+//        return "redirect:/details/" + id ;
+        UserEditServiceModel serviceModel=modelMapper.map(editUserBindingModel,
+                UserEditServiceModel.class);
+        serviceModel.setId(id);
+        userService.update(serviceModel);
+
+        return "redirect:/profile";
     }
 
 }

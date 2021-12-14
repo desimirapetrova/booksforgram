@@ -83,8 +83,6 @@ public class BookController {
         !principal.getName().equals("admin")){
             throw new com.example.booksforgram.web.exception.ObjectNotFoundException("Not found",id);
         }
-        System.out.println(principal.getName());
-        System.out.println(bookModel.getOwner().getUsername());
 //        model.addAttribute("engines", EngineEnum.values());
 //        model.addAttribute("transmissions", TransmissionEnum.values());
         model.addAttribute("bookModel", bookModel);

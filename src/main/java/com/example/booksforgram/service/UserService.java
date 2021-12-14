@@ -1,6 +1,7 @@
 package com.example.booksforgram.service;
 
 import com.example.booksforgram.model.entity.User;
+import com.example.booksforgram.model.service.UserEditServiceModel;
 import com.example.booksforgram.model.service.UserServiceModel;
 import org.springframework.data.jpa.repository.Query;
 
@@ -29,4 +30,6 @@ public interface UserService {
     boolean isUserNameFree(String userName);
 
     boolean isEmailFree(String email);
+
+    void update(UserEditServiceModel serviceModel);
 }

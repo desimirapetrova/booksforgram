@@ -33,6 +33,7 @@
 <!--                            <h5 sec:authentication='id' >Marie Horwitz</h5>-->
                             <p  th:text="${user.first_name +' '+ user.last_name}">Web Designer</p>
                             <i class="far fa-edit mb-5"></i>
+                            <a th:href="@{/profile/{id}/edit(id=*{id})}" type="submit" class="btn bg-cart"><i class="fa  mr-2"></i> Редактирай</a>
                         </div>
                         <div class="col-md-8 info">
                             <div class="">

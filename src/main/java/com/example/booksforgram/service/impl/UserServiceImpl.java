@@ -1,13 +1,16 @@
 package com.example.booksforgram.service.impl;
 
+import com.example.booksforgram.model.entity.Book;
 import com.example.booksforgram.model.entity.Role;
 import com.example.booksforgram.model.entity.User;
 import com.example.booksforgram.model.entity.enums.GenderEnum;
 import com.example.booksforgram.model.entity.enums.UserRoleEnum;
+import com.example.booksforgram.model.service.UserEditServiceModel;
 import com.example.booksforgram.model.service.UserServiceModel;
 import com.example.booksforgram.repository.RoleRepository;
 import com.example.booksforgram.repository.UserRepository;
 import com.example.booksforgram.service.UserService;
+import com.example.booksforgram.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -134,6 +137,35 @@ public class UserServiceImpl implements UserService {
     public boolean isEmailFree(String email) {
 
         return userRepository.findByEmailIgnoreCase(email).isEmpty();
+    }
+
+    @Override
+    public void update(UserEditServiceModel serviceModel) {
+//        Book book =
+//                bookRepository.findById(bookModel.getId()).orElseThrow(() ->
+//                        new ObjectNotFoundException("Book with id " + bookModel.getId() + " not found!", bookModel.getId()));
+//        book.setPrice(book.getPrice());
+//        book.setDescription(book.getDescription());
+//        book.setName(bookModel.getName());
+//        book.setDescription(bookModel.getDescription());
+//        book.setPrice(bookModel.getPrice());
+//        book.setAuthor(bookModel.getAuthor());
+//        book.setImageUrl(bookModel.getImageUrl());
+//        book.setCategory(categoryService.findByCategoryEnum(bookModel.getCategory()));
+//        book.setCondition(conditionService.findByConditionEnum(bookModel.getCondition()));
+//        bookRepository.save(book);
+        User user=userRepository.findById(serviceModel.getId())
+                .orElseThrow(() ->
+                        new ObjectNotFoundException("User with id " + serviceModel.getId() + " not found!", serviceModel.getId()));
+//        user.setUsername(user.getUsername());
+//        user.setGender(userRepository.findByGender(serviceModel.getGender()));
+        user.setAge(serviceModel.getAge());
+        user.setFirst_name(serviceModel.getFirst_name());
+        user.setLast_name(serviceModel.getLast_name());
+//        user.setEmail(user.getEmail());
+        user.setRoles(serviceModel.getRole());
+        userRepository.save(user);
+
     }
 
 
