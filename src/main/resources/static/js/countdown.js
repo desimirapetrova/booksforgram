@@ -1,7 +1,10 @@
 setInterval(function time(){
     var d = new Date();
-    var hours = 24 - d.getHours()+17;
-    var min = 60 - d.getMinutes();
+    var hours = 17 - d.getHours();
+    if(d.getHours()>17){
+        hours=24-d.getHours()+17;
+    }
+    var min =60-d.getMinutes();
     if((min + '').length == 1){
         min = '0' + min;
     }

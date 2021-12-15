@@ -73,6 +73,7 @@
                 <a sec:authorize="isAuthenticated()"href="/add-book">Добави книга</a>
             <th:block sec:authorize="hasRole('ADMIN')">
                 <a  href="/statistics">Статистика</a>
+                <a href="/users">Потребители</a>
             </th:block>
             <a sec:authorize="isAuthenticated()" class="float-right"href="/logout">Излез</a>
 

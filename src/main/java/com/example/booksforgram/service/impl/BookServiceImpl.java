@@ -202,7 +202,7 @@ public class BookServiceImpl implements BookService {
     public void updateBook(BookUpdateServiceModel bookModel) {
         Book book =
                 bookRepository.findById(bookModel.getId()).orElseThrow(() ->
-                        new ObjectNotFoundException("Book with id " + bookModel.getId() + " not found!", bookModel.getId()));
+                        new ObjectNotFoundException("Book not found!"));
         book.setPrice(book.getPrice());
              book.setDescription(book.getDescription());
                 book.setName(bookModel.getName());

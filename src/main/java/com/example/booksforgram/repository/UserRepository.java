@@ -29,4 +29,5 @@ public interface UserRepository extends JpaRepository<User,Long> {
     Set<Role> findByRoles(UserRoleEnum roleEnum);
 
     GenderEnum findByGender(GenderEnum gender);
+
 }

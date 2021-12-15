@@ -2,16 +2,18 @@ package com.example.booksforgram.web;
 
 import com.example.booksforgram.model.binding.AddBookBindingModel;
 import com.example.booksforgram.model.binding.BookUpdateBindingModel;
-import com.example.booksforgram.model.binding.LoginBindingModel;
-import com.example.booksforgram.model.binding.PictureBindingModel;
-import com.example.booksforgram.model.entity.Picture;
+import com.example.booksforgram.model.entity.Book;
+import com.example.booksforgram.model.entity.Role;
+import com.example.booksforgram.model.entity.User;
+import com.example.booksforgram.model.entity.enums.UserRoleEnum;
 import com.example.booksforgram.model.service.BookServiceModel;
 import com.example.booksforgram.model.service.BookUpdateServiceModel;
 import com.example.booksforgram.model.view.BookViewModel;
 import com.example.booksforgram.repository.PictureRepository;
+import com.example.booksforgram.repository.RoleRepository;
 import com.example.booksforgram.service.BookService;
-import com.example.booksforgram.service.CloudinaryImage;
 import com.example.booksforgram.service.CloudinaryService;
+import com.example.booksforgram.service.UserService;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -33,12 +34,16 @@ public class BookController {
     private final ModelMapper modelMapper;
     private final PictureRepository pictureRepository;
     private final CloudinaryService cloudinaryService;
+    private final UserService userService;
+    private final RoleRepository roleRepository;
 
-    public BookController(BookService bookService, ModelMapper modelMapper, PictureRepository pictureRepository, CloudinaryService cloudinaryService) {
+    public BookController(BookService bookService, ModelMapper modelMapper, PictureRepository pictureRepository, CloudinaryService cloudinaryService, UserService userService, RoleRepository roleRepository) {
         this.bookService = bookService;
         this.modelMapper = modelMapper;
         this.pictureRepository = pictureRepository;
         this.cloudinaryService = cloudinaryService;
+        this.userService = userService;
+        this.roleRepository = roleRepository;
     }
 
     @GetMapping("/add-book")
@@ -76,12 +81,16 @@ public class BookController {
         BookViewModel bookViewModel = bookService.findById2(id, principal.getName());
         BookUpdateBindingModel bookModel = modelMapper.map(
                 bookViewModel,
-                BookUpdateBindingModel.class
-        );
-        if(!bookModel.getOwner().getUsername().equals(principal.getName())
-                &&
-        !principal.getName().equals("admin")){
-            throw new com.example.booksforgram.web.exception.ObjectNotFoundException("Not found",id);
+                BookUpdateBindingModel.class);
+        Book book=bookService.findById(id);
+        User currentUser =userService.findByUsername(principal.getName());
+        if(!book.getOwner().getUsername().equals(principal.getName())){
+            currentUser.getRoles().stream().forEach(u->{
+                        if(u.getRole().equals(UserRoleEnum.USER)) {
+                            throw new com.example.booksforgram.web.exception.ObjectNotFoundException("Not found");
+
+                        }
+            });
         }
 //        model.addAttribute("engines", EngineEnum.values());
 //        model.addAttribute("transmissions", TransmissionEnum.values());

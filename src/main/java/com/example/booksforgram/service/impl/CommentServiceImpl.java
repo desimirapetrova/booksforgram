@@ -53,11 +53,11 @@ public class CommentServiceImpl implements CommentService {
 
         var book = bookRepository.
                 findById(commentServiceModel.getBookId()).
-                orElseThrow(() -> new ObjectNotFoundException("Book with id " + commentServiceModel.getBookId() + " not found!",commentServiceModel.getBookId()));
+                orElseThrow(() -> new ObjectNotFoundException("Book not found!"));
 
         var author = userRepository.
                 findByUsername(commentServiceModel.getCreator()).
-                orElseThrow(() -> new ObjectNotFoundException("User with eamil " + commentServiceModel.getCreator() + " not found!",commentServiceModel.getBookId()));
+                orElseThrow(() -> new ObjectNotFoundException("User not found!"));
 
         Comment newComment = new Comment();
         newComment.setApproved(false);

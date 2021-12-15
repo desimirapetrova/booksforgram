@@ -6,7 +6,9 @@ import com.example.booksforgram.model.binding.LoginBindingModel;
 import com.example.booksforgram.model.binding.RegisterBindingModel;
 import com.example.booksforgram.model.entity.Book;
 import com.example.booksforgram.model.entity.Order;
+import com.example.booksforgram.model.entity.Role;
 import com.example.booksforgram.model.entity.User;
+import com.example.booksforgram.model.entity.enums.UserRoleEnum;
 import com.example.booksforgram.model.service.BookUpdateServiceModel;
 import com.example.booksforgram.model.service.UserEditServiceModel;
 import com.example.booksforgram.model.service.UserServiceModel;
@@ -15,6 +17,7 @@ import com.example.booksforgram.service.EmailService;
 import com.example.booksforgram.service.OrderService;
 import com.example.booksforgram.service.UserService;
 import javassist.tools.rmi.ObjectNotFoundException;
+import org.apache.tomcat.util.http.parser.Authorization;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
@@ -27,6 +30,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
@@ -154,6 +158,21 @@ public class UserController {
     public String editOffer(@PathVariable Long id, Model model,
                             Principal principal) {
         model.addAttribute("user", userService.findById(id));
+        User user=userService.findById(id);
+        User currentUser=userService.findByUsername(principal.getName());
+
+//        if(!user.getUsername().equals(principal.getName())
+//        ){
+//            throw new com.example.booksforgram.web.exception.ObjectNotFoundException("Not found",id);
+//        }
+        if(!user.getUsername().equals(principal.getName())){
+        currentUser.getRoles().stream().forEach(u-> {
+            if(u.getRole().equals(UserRoleEnum.USER)) {
+                throw new com.example.booksforgram.web.exception.ObjectNotFoundException("Not found");
+            }
+        }
+        );
+        }
         return "updateProfile";
     }
     @PatchMapping("/profile/{id}/edit")
@@ -161,7 +180,8 @@ public class UserController {
             @PathVariable Long id,
             @Valid EditUserBindingModel editUserBindingModel,
             BindingResult bindingResult,
-            RedirectAttributes redirectAttributes) throws ObjectNotFoundException {
+            RedirectAttributes redirectAttributes,
+            Principal principal) throws ObjectNotFoundException {
 
         if (bindingResult.hasErrors()) {
 
@@ -170,16 +190,9 @@ public class UserController {
 
             return "redirect:/profile/" + id + "/edit";
         }
-
-//        BookUpdateServiceModel serviceModel = modelMapper.map(bookModel,
-//                BookUpdateServiceModel.class);
-//        serviceModel.setId(id);
-//
-//        bookService.updateBook(serviceModel);
-//
-//        return "redirect:/details/" + id ;
         UserEditServiceModel serviceModel=modelMapper.map(editUserBindingModel,
                 UserEditServiceModel.class);
+
         serviceModel.setId(id);
         userService.update(serviceModel);
 

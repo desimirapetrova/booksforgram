@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -156,17 +157,40 @@ public class UserServiceImpl implements UserService {
 //        bookRepository.save(book);
         User user=userRepository.findById(serviceModel.getId())
                 .orElseThrow(() ->
-                        new ObjectNotFoundException("User with id " + serviceModel.getId() + " not found!", serviceModel.getId()));
+                        new ObjectNotFoundException("User not found!"));
 //        user.setUsername(user.getUsername());
 //        user.setGender(userRepository.findByGender(serviceModel.getGender()));
         user.setAge(serviceModel.getAge());
         user.setFirst_name(serviceModel.getFirst_name());
         user.setLast_name(serviceModel.getLast_name());
 //        user.setEmail(user.getEmail());
-        user.setRoles(serviceModel.getRole());
         userRepository.save(user);
 
     }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll().stream()
+                .map(user -> modelMapper.map(user,User.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void makeAdmin(Long id) {
+        Role adminRole=roleRepository.findByRole(UserRoleEnum.ADMIN);
+        Role userRole=roleRepository.findByRole(UserRoleEnum.USER);
+        User user=userRepository.findById(id).orElse(null);
+       user.getRoles().stream().forEach(u-> {
+           if(u.getId().equals(2L)) {
+               user.setRoles(Set.of(adminRole));
+               userRepository.save(user);
+           }else {
+               user.setRoles(Set.of(userRole));
+               userRepository.save(user);
+           }
+       });
+    }
+
 
 
     private void initializeUsers() {

@@ -46,7 +46,7 @@ public class AllBooksController {
         //itemService.showDetails(id);
         Book book=bookService.findById(id);
         if(book==null){
-            throw new ObjectNotFoundException("Not found",id);
+            throw new ObjectNotFoundException("Not found");
         }
 
         model.addAttribute("comments",commentService.findAll());

@@ -1,33 +1,29 @@
 package com.example.booksforgram.web;
 
-
 import com.example.booksforgram.model.entity.User;
 import com.example.booksforgram.model.entity.enums.UserRoleEnum;
-import com.example.booksforgram.service.StatsService;
 import com.example.booksforgram.service.UserService;
 import com.example.booksforgram.web.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 
 @Controller
-public class StatsController {
-
-    private final StatsService statsService;
+public class UsersRoleController {
     private final UserService userService;
 
-    public StatsController(StatsService statsService, UserService userService) {
-        this.statsService = statsService;
+    public UsersRoleController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/statistics")
-    public ModelAndView statistics(Principal principal) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("stats", statsService.getStats());
-        modelAndView.setViewName("statistics");
+    @GetMapping("/users")
+    public String allUsers(Model model, Principal principal){
+        model.addAttribute("users",userService.findAll());
         User currentUser =userService.findByUsername(principal.getName());
         currentUser.getRoles().stream().forEach(u->{
             if(u.getRole().equals(UserRoleEnum.USER)) {
@@ -35,7 +31,11 @@ public class StatsController {
 
             }
         });
-        return modelAndView;
+        return "users";
     }
-
+    @PatchMapping("/users/{id}")
+    public String makeUsersAdmin(Model model,@PathVariable Long id){
+        userService.makeAdmin(id);
+        return "redirect:/users";
+    }
 }

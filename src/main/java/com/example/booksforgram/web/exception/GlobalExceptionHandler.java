@@ -10,7 +10,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ObjectNotFoundException.class)
     public ModelAndView handleDbExceptions(ObjectNotFoundException e) {
         ModelAndView modelAndView = new ModelAndView("error/object-not-found");
-        modelAndView.addObject("objectId", e.getObjectId());
+//        modelAndView.addObject("objectId", e.getObjectId());
         modelAndView.setStatus(HttpStatus.NOT_FOUND);
         return modelAndView;
     }

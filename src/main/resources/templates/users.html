@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <style>
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            background: #fff;
+            font-size: 3rem;
+        }
+
+        table, table tr, table tr td, table tr th {
+            border: solid 1px #ddd;
+            font-size: 2rem;
+
+
+        }
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+</style>
+<head th:replace="fragments/commons::head"></head>
+<body>
+
+<header th:replace="fragments/commons::header" class="header">
+</header>
+<h1 class="heading"> <span>Потребители</span> </h1>
+<section style="padding: 2rem">
+<table >
+    <tr style="color: orange ;    font-weight: bold;">
+        <th>Потребител</th>
+        <th>Роля</th>
+        <th>Контролиране на роли</th>
+    </tr>
+    <tr th:each="u:${users}" th:object="${u}">
+        <td th:text="*{username}" :>Alfreds Futterkiste</td>
+        <td th:each="e:*{roles}" th:text="${e.role}">Francisco Chang</td>
+        <th >
+            <form th:action="@{/users/{id}(id=*{id})}" th:method="patch">
+
+                    <button  type="submit" class="btn">Промени ролята</button>
+<!--                <th:block th:unless="${e.role.equals('ADMIN')}">-->
+<!--                    <button  type="submit" class="btn">Направи го потребител</button>-->
+<!--                </th:block>-->
+<!--                </th:block>-->
+            </form>
+        </th>
+        </th:block>
+    </tr>
+</table>
+</section>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>
